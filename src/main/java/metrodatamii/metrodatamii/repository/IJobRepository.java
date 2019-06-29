@@ -5,10 +5,13 @@
  */
 package metrodatamii.metrodatamii.repository;
 
+import metrodatamii.metrodatamii.entities.Job;
+import org.springframework.data.repository.CrudRepository;
+
 /**
  *
  * @author Arif Fridasari
  */
-public interface IJobRepository {
+public interface IJobRepository extends CrudRepository<Job, String> {
     
 }

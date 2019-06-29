@@ -5,6 +5,7 @@
  */
 package metrodatamii.metrodatamii.controller;
 
+import metrodatamii.metrodatamii.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class MainController {
+
+    @Autowired
+    private JobService jobService;
 
     @GetMapping("/")
     public String login(Model model) {
@@ -39,6 +43,7 @@ public class MainController {
 
     @GetMapping("/job")
     public String job(Model model) {
+        model.addAttribute("dataJob", jobService.findAllJob());
         return "job";
     }
 
