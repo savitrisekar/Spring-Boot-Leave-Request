@@ -5,9 +5,8 @@
  */
 package metrodatamii.metrodatamii.service;
 
-import java.util.Optional;
-import metrodatamii.metrodatamii.entities.Job;
-import metrodatamii.metrodatamii.repository.IJobRepository;
+import metrodatamii.metrodatamii.entities.Account;
+import metrodatamii.metrodatamii.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,20 +15,12 @@ import org.springframework.stereotype.Service;
  * @author Arif Fridasari
  */
 @Service
-public class JobService {
+public class AccountService {
 
     @Autowired
-    private IJobRepository jobRepository;
+    private IAccountRepository accountRepository;
 
-    
-    public Iterable<Job> findAllJob() {
-        return jobRepository.findAll();
+    public Iterable<Account> findAllAccount() {
+        return accountRepository.findAll();
     }
-
-    public Job saveJob(Job job) {
-        return jobRepository.save(job);
-    }
-    
-    
-
 }

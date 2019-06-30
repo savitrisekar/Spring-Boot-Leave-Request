@@ -5,14 +5,13 @@
  */
 package metrodatamii.metrodatamii.repository;
 
-import java.util.List;
-import metrodatamii.metrodatamii.entities.Employee;
+import metrodatamii.metrodatamii.entities.LeaveRequest;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author Arif Fridasari
  */
-public interface IEmployeeRepository extends CrudRepository<Employee, String>{
-   
+public interface ILeaveRequestRepository extends CrudRepository<LeaveRequest, String> {
+    
 }
