@@ -6,6 +6,7 @@
 package metrodatamii.metrodatamii.controller;
 
 import metrodatamii.metrodatamii.entities.LeaveRequest;
+import metrodatamii.metrodatamii.entities.Status;
 import metrodatamii.metrodatamii.repository.ILeaveRequestRepository;
 import metrodatamii.metrodatamii.service.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class UserController {
     @PostMapping("/addRequest")
     public String addRequest(LeaveRequest leaveRequest) {
         leaveRequest.setId("0");
+        Status status = new Status();
+        status.setId(1);
+        leaveRequest.setStatus(status);
         leaveRequestRepository.save(leaveRequest);
         return "redirect:/user";
     }

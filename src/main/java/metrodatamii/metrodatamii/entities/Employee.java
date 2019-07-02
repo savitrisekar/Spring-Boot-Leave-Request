@@ -8,7 +8,6 @@ package metrodatamii.metrodatamii.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -75,9 +73,7 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 14)
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+    @Size(max = 5)
     @Column(name = "is_delete")
     private String isDelete;
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
@@ -85,14 +81,6 @@ public class Employee implements Serializable {
     @JoinColumn(name = "manager", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee manager;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "requester", fetch = FetchType.LAZY)
-    private List<LeaveRequest> leaveRequestList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private Account account;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<EmployeeRole> employeeRoleList;
 
     public Employee() {
     }
@@ -101,14 +89,13 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, String isDelete) {
+    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.salary = salary;
         this.phoneNumber = phoneNumber;
-        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -182,41 +169,6 @@ public class Employee implements Serializable {
 
     public void setManager(Employee manager) {
         this.manager = manager;
-    }
-
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
-    }
-
-    @XmlTransient
-    public List<LeaveRequest> getLeaveRequestList() {
-        return leaveRequestList;
-    }
-
-    public void setLeaveRequestList(List<LeaveRequest> leaveRequestList) {
-        this.leaveRequestList = leaveRequestList;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    @XmlTransient
-    public List<EmployeeRole> getEmployeeRoleList() {
-        return employeeRoleList;
-    }
-
-    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
-        this.employeeRoleList = employeeRoleList;
     }
 
     @Override

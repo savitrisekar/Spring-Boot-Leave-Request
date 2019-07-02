@@ -49,12 +49,12 @@ public class LeaveRequest implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     @Basic(optional = false)
     @NotNull
@@ -142,6 +142,7 @@ public class LeaveRequest implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
+
     
     public LeaveType getType() {
         return type;

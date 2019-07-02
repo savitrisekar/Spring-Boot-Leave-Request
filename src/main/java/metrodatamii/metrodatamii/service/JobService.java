@@ -5,6 +5,7 @@
  */
 package metrodatamii.metrodatamii.service;
 
+import java.util.List;
 import java.util.Optional;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.repository.IJobRepository;
@@ -21,8 +22,20 @@ public class JobService {
     @Autowired
     private IJobRepository jobRepository;
 
-    public Iterable<Job> findAllJob() {
-        return jobRepository.findAll();
+    public List<Job> getAll() {
+        return jobRepository.getAll();
     }
+
+//    public Job saveJob(Job job) {
+//        return jobRepository.save(job);
+//    }
+//
+//    public Job findById(String id) {
+//        return jobRepository.findJobId(id);
+//    }
+//
+//    public void deleteById(String id) {
+//        jobRepository.deleteById(id);
+//    }
 
 }

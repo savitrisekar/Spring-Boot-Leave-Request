@@ -6,21 +6,16 @@
 package metrodatamii.metrodatamii.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,13 +43,9 @@ public class Job implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+    @Size(max = 5)
     @Column(name = "is_delete")
     private String isDelete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
-    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -63,10 +54,9 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public Job(String id, String name, String isDelete) {
+    public Job(String id, String name) {
         this.id = id;
         this.name = name;
-        this.isDelete = isDelete;
     }
 
     public String getId() {
@@ -91,15 +81,6 @@ public class Job implements Serializable {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
-    }
-
-    @XmlTransient
-    public List<EmployeeJob> getEmployeeJobList() {
-        return employeeJobList;
-    }
-
-    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
-        this.employeeJobList = employeeJobList;
     }
 
     @Override

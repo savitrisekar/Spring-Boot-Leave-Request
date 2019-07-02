@@ -15,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Arif Fridasari
  */
 public interface IEmployeeRepository extends CrudRepository<Employee, String>{
-   @Query(value = "SELECT * FROM employee e WHERE e.is_delete = 'false'", nativeQuery = true)
+   @Query(value = "SELECT * FROM employee WHERE is_delete = 'false'", nativeQuery = true)
     List<Employee> getAll();
 }

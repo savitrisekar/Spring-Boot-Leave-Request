@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!-- Modal AddJob -->
+<div th:fragment="m_job">
+    <div class="modal fade" id="AddJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Job</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <div class=" form">
+                                    <form th:action="@{/addJob}" method="post" class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="name" class="control-label col-lg-2">Job</label>
+                                            <div class="col-sm-9">
+                                                <input id="name" name="name" type="text" class="form-control" placeholder="name job">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button class="btn btn-theme btnSave" type="submit" value = "Add Job">Save</button>
+                                                <button class="btn btn-theme04" type="button" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /form-panel -->
+                        </div>
+                        <!-- /col-lg-12 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal AddJob -->
+    <!-- Modal Edit -->
+    <div class="modal fade" id="EditJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <div class=" form">
+                                    <form class="cmxform form-horizontal style-form" th:action="@{/jobEdit/id}" method="post">
+                                        <div class="form-group ">
+                                            <label for="id" class="control-label col-lg-2">Id</label>
+                                            <div class="col-lg-10">
+                                                <input class=" form-control" id="id" name="id" type="text" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="name" class="control-label col-lg-2">Job</label>
+                                            <div class="col-lg-10">
+                                                <input class=" form-control" id="name" name="name" minlength="2" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button class="btn btn-theme btnSave" type="submit" >Save</button>
+                                                <button class="btn btn-theme04" type="button" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--    <div class="modal fade" id="SoftDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <div class=" form">
+                                    <form class="cmxform form-horizontal style-form" th:action="@{/jobDelete/id}" method="get">
+                                        <div class="form-group ">
+                                            <label for="id" class="control-label col-lg-2">Id</label>
+                                            <div class="col-lg-10">
+                                                <input  type="hidden" class=" form-control" id="id" name="id" placeholder="job id" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="name" class="control-label col-lg-2">Job</label>
+                                            <div class="col-lg-10">
+                                                <input class=" form-control" id="name" name="name" minlength="2" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button class="btn btn-theme btnSave" type="submit" >Save</button>
+                                                <button class="btn btn-theme04" type="button">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <script>
+        $(document).ready(function () {
+            $("#SoftDel").on('show.bs.modal', function (e) {
+                var _button = $(e.relatedTarget);
+                var _row = _button.parents("tr");
+
+                var _job_id = _row.find("#id").text();
+                var _job_name = _row.find("#name").text();
+
+                $(this).find("#id").val(_job_id);
+                $(this).find("#name").val(_job_name);
+
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#EditJob").on('show.bs.modal', function (e) {
+                var _button = $(e.relatedTarget);
+                var _row = _button.parents("tr");
+
+                var _jobId = _row.find("#id").text();
+                var _jobName = _row.find("#name").text();
+                var _isdelete = _row.find("#isDelete").text();
+
+                $(this).find("#id").val(_jobId);
+                $(this).find("#name").val(_jobName);
+                $(this).find("#isDelete").val(_isdelete);
+                alert(oi);
+
+            });
+        });
+    </script>
+</div>
+<!-- End Modal AddJob -->
