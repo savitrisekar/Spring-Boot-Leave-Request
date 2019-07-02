@@ -42,7 +42,7 @@
                 
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li><a class="logout" th:href="@{/login}">Logout</a></li>
+                        <li><a class="logout" th:href="@{/}">Logout</a></li>
                     </ul>
                 </div>
             </header>
@@ -55,7 +55,7 @@
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="profile.html"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a th:href="@{/user/profile}"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
                             <a class="active" th:href="@{/user}">
@@ -69,8 +69,8 @@
                                 <span>Leave Request</span>
                             </a>
                             <ul class="sub">
-                                <li><a th:href="@{/user/apply}">Apply Request</a></li>
-                                <li><a th:href="@{/user/history}">History</a></li>
+                                <li><a th:href="@{/user/request}">Request</a></li>
+                                <li><a th:href="@{/user/information}">Information</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="Dashboard">
         <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-        <title>History_Request</title>
+        <title>Apply-Request</title>
 
         <!-- Favicons -->
         <link th:href="@{/dist/img/favicon.png}" rel="icon">
@@ -48,7 +48,7 @@
 
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
-                        <li><a class="logout" th:href="@{/login}">Logout</a></li>
+                        <li><a class="logout" th:href="@{/}">Logout</a></li>
                     </ul>
                 </div>
             </header>
@@ -61,7 +61,7 @@
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="profile.html"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a th:href="@{/user/profile}"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
                             <a th:href="@{/user}">
@@ -75,8 +75,8 @@
                                 <span>Leave Request</span>
                             </a>
                             <ul class="sub">
-                                <li><a th:href="@{/user/apply}">Apply Request</a></li>
-                                <li class="active"><a th:href="@{/user/history}">History</a></li>
+                                <li><a th:href="@{/user/request}">Request</a></li>
+                                <li class="active"><a th:href="@{/user/information}">Information</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -88,54 +88,7 @@
                 MAIN CONTENT
                 *********************************************************************************************************************************************************** -->
             <!--main content start-->
-            <section id="main-content">
-                <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i>  List Leave Request</h3>
-                    <div class="row mb">
-                        <!-- page start-->
-                        <div class="content-panel">
-                            <div class="adv-table">
-                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-                                    <thead>
-                                        <tr>
-                                            <!--<th>No.</th>-->
-                                            <th>ID</th>
-                                            <th>Requester</th>
-                                            <th>Type</th>
-                                            <th>Notes</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Total Leave</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="LR:${dataLR}">
-                                            <td th:text="${LR.id}"></td>
-                                            <td th:text="${LR.requester.firstName}"></td>
-                                            <td th:text="${LR.type.name}"></td>
-                                            <td th:text="${LR.notes}"></td>
-                                            <td th:text="${LR.startDate}"></td>
-                                            <td th:text="${LR.endDate}"></td>
-                                            <td th:text="${LR.totalLeave}"></td>
-                                            <td th:text="${LR.status.name}"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Approved</button>
-                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i>&nbsp;&nbsp;Rejected</button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- page end-->
-                    </div>
-                    <!-- /row -->
-                </section>
-                <!-- /wrapper -->
-            </section>
+           
             <!--main content end-->
 
 

@@ -23,7 +23,7 @@ public class UserController {
 
     @Autowired
     private LeaveTypeService typeService;
-    
+
     @Autowired
     private ILeaveRequestRepository leaveRequestRepository;
 
@@ -32,23 +32,27 @@ public class UserController {
         return "indexUser";
     }
 
-    @GetMapping("/user/apply")
-    public String apply(Model model) {
-        model.addAttribute("dataType", typeService.findAllType());
-        return "user_apply";
+    @GetMapping("/user/information")
+    public String information(Model model) {
+        return "user_information";
     }
 
     @PostMapping("/addRequest")
     public String addRequest(LeaveRequest leaveRequest) {
         leaveRequest.setId("0");
         leaveRequestRepository.save(leaveRequest);
-        return "redirect:/user_apply";
+        return "redirect:/user";
     }
 
-   
-    @GetMapping("/user/history")
+    @GetMapping("/user/request")
     public String userHistory(Model model) {
-        return "user_history";
+        model.addAttribute("dataType", typeService.findAllType());
+        model.addAttribute("dataLR", leaveRequestRepository.getByStatusPending());
+        return "user_request";
     }
 
+    @GetMapping("/user/profile")
+    public String profile(Model model) {
+        return "user_profile";
+    }
 }
