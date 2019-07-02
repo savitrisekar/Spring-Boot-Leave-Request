@@ -21,7 +21,7 @@ public class EmployeeService {
     @Autowired
     private IEmployeeRepository employeeRepository;
 
-    public Iterable<Employee> findAllEmployee() {
-        return employeeRepository.findAll();
+    public List<Employee> getAll() {
+        return employeeRepository.getAll();
     }
 }

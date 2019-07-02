@@ -8,6 +8,7 @@ package metrodatamii.metrodatamii.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,14 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "employee")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
-    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
-    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
-    , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
-    , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
+    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,6 +76,14 @@ public class Employee implements Serializable {
     @JoinColumn(name = "manager", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee manager;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "requester", fetch = FetchType.LAZY)
+    private List<LeaveRequest> leaveRequestList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private Account account;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<EmployeeRole> employeeRoleList;
 
     public Employee() {
     }
@@ -169,6 +172,41 @@ public class Employee implements Serializable {
 
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
+    }
+
+    @XmlTransient
+    public List<LeaveRequest> getLeaveRequestList() {
+        return leaveRequestList;
+    }
+
+    public void setLeaveRequestList(List<LeaveRequest> leaveRequestList) {
+        this.leaveRequestList = leaveRequestList;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    @XmlTransient
+    public List<EmployeeRole> getEmployeeRoleList() {
+        return employeeRoleList;
+    }
+
+    public void setEmployeeRoleList(List<EmployeeRole> employeeRoleList) {
+        this.employeeRoleList = employeeRoleList;
     }
 
     @Override

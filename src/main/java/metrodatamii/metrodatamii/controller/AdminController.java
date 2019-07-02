@@ -73,21 +73,28 @@ public class AdminController {
 
     @GetMapping("/employee")
     public String employee(Model model) {
-        model.addAttribute("dataEmployee", employeeService.findAllEmployee());
+        model.addAttribute("dataEmployee", employeeService.getAll());
         return "employee";
+    }
+
+    @PostMapping("/employeeEdit/{id}")
+    public String updateEmp(@PathVariable("id") String id, @Valid Employee employee) {
+        employee.setIsDelete("false");
+        employeeRepository.save(employee);
+        return "redirect:/employee";
     }
 
     @GetMapping("/account")
     public String account(Model model) {
         model.addAttribute("dataAccount", accountService.findAllAccount());
-        model.addAttribute("dataEmployee", employeeService.findAllEmployee());
+        model.addAttribute("dataEmployee", employeeService.getAll());
         return "account";
     }
 
     @GetMapping("/job")
     public String job(Model model) {
         model.addAttribute("dataJob", jobService.getAll());
-        model.addAttribute("dataEmployee", employeeService.findAllEmployee());
+        model.addAttribute("dataEmployee", employeeService.getAll());
         return "job";
     }
 
@@ -136,7 +143,7 @@ public class AdminController {
     @GetMapping("/role")
     public String role(Model model) {
         model.addAttribute("dataRole", roleService.findAllRole());
-        model.addAttribute("dataEmployee", employeeService.findAllEmployee());
+        model.addAttribute("dataEmployee", employeeService.getAll());
         return "role";
     }
 

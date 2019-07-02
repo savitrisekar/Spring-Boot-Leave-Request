@@ -6,16 +6,21 @@
 package metrodatamii.metrodatamii.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,10 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "job")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
-    , @NamedQuery(name = "Job.findById", query = "SELECT j FROM Job j WHERE j.id = :id")
-    , @NamedQuery(name = "Job.findByName", query = "SELECT j FROM Job j WHERE j.name = :name")
-    , @NamedQuery(name = "Job.findByIsDelete", query = "SELECT j FROM Job j WHERE j.isDelete = :isDelete")})
+    @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")})
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +48,8 @@ public class Job implements Serializable {
     @Size(max = 5)
     @Column(name = "is_delete")
     private String isDelete;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "job", fetch = FetchType.LAZY)
+    private List<EmployeeJob> employeeJobList;
 
     public Job() {
     }
@@ -81,6 +85,15 @@ public class Job implements Serializable {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
+    }
+
+    @XmlTransient
+    public List<EmployeeJob> getEmployeeJobList() {
+        return employeeJobList;
+    }
+
+    public void setEmployeeJobList(List<EmployeeJob> employeeJobList) {
+        this.employeeJobList = employeeJobList;
     }
 
     @Override
