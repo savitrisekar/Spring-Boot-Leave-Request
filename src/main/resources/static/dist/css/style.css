@@ -1745,6 +1745,8 @@ label {
     border-bottom: 1px solid #eff2f7;
     padding-bottom: 15px;
     margin-bottom: 15px;
+    margin-top: 1.5em;
+    margin-left: 3em;
 }
 
 .round-form {

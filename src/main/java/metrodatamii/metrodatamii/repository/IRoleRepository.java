@@ -6,7 +6,7 @@
 package metrodatamii.metrodatamii.repository;
 
 import java.util.List;
-import metrodatamii.metrodatamii.entities.Employee;
+import metrodatamii.metrodatamii.entities.Role;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Arif Fridasari
  */
-public interface IEmployeeRepository extends CrudRepository<Employee, String>{
-   @Query(value = "SELECT * FROM employee e WHERE e.is_delete = 'false'", nativeQuery = true)
-    List<Employee> getAll();
+public interface IRoleRepository extends CrudRepository<Role, String> {
+    @Query(value = "SELECT * FROM role r  WHERE r.is_delete = 'false'", nativeQuery = true)
+    List<Role> getAll();
 }

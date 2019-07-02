@@ -5,15 +5,14 @@
  */
 package metrodatamii.metrodatamii.controller;
 
-import metrodatamii.metrodatamii.service.AccountService;
-import metrodatamii.metrodatamii.service.EmployeeService;
-import metrodatamii.metrodatamii.service.JobService;
-import metrodatamii.metrodatamii.service.LeaveRequestService;
+import metrodatamii.metrodatamii.entities.LeaveRequest;
+import metrodatamii.metrodatamii.repository.ILeaveRequestRepository;
+import metrodatamii.metrodatamii.service.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -23,45 +22,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    private JobService jobService;
-
+    private LeaveTypeService typeService;
+    
     @Autowired
-    private AccountService accountService;
+    private ILeaveRequestRepository leaveRequestRepository;
 
-    @Autowired
-    private EmployeeService employeeService;
+    @GetMapping("/user")
+    public String user(Model model) {
+        return "indexUser";
+    }
 
-    @Autowired
-    private LeaveRequestService leaveRequestService;
+    @GetMapping("/user/apply")
+    public String apply(Model model) {
+        model.addAttribute("dataType", typeService.findAllType());
+        return "user_apply";
+    }
 
-//    @GetMapping("/user")
-//    public String user(Model model) {
-//        return "index_user";
-//    }
+    @PostMapping("/addRequest")
+    public String addRequest(LeaveRequest leaveRequest) {
+        leaveRequest.setId("0");
+        leaveRequestRepository.save(leaveRequest);
+        return "redirect:/user_apply";
+    }
 
-//    @GetMapping("/employee")
-//    public String employee(Model model) {
-//        model.addAttribute("dataEmployee", employeeService.findAllEmployee());
-//        return "employee";
-//    }
-//
-//    @GetMapping("/account")
-//    public String account(Model model) {
-//        model.addAttribute("dataAccount", accountService.findAllAccount());
-//        return "account";
-//    }
-//
-//    @GetMapping("/job")
-//    public String job(Model model) {
-//
-//        model.addAttribute("dataJob", jobService.findAllJob());
-//        return "job";
-//    }
-//
-//    @GetMapping("/listrequest")
-//    public String listreq(Model model) {
-//
-//        model.addAttribute("dataLR", leaveRequestService.findAllLR());
-//        return "listrequest";
-//    }
+   
+    @GetMapping("/user/history")
+    public String userHistory(Model model) {
+        return "user_history";
+    }
+
 }

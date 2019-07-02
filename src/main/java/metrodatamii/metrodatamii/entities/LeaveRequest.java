@@ -142,7 +142,7 @@ public class LeaveRequest implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
-
+    
     public LeaveType getType() {
         return type;
     }
@@ -175,5 +175,7 @@ public class LeaveRequest implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.LeaveRequest[ id=" + id + " ]";
     }
+
+    
     
 }

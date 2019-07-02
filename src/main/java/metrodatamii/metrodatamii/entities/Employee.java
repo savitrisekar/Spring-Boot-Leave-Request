@@ -77,8 +77,9 @@ public class Employee implements Serializable {
     private String phoneNumber;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_delete")
-    private boolean isDelete;
+    private String isDelete;
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
     @JoinColumn(name = "manager", referencedColumnName = "id")
@@ -100,7 +101,7 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, boolean isDelete) {
+    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, String isDelete) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -158,11 +159,11 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean getIsDelete() {
+    public String getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(boolean isDelete) {
+    public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
     }
 

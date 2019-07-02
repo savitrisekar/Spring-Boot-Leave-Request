@@ -19,14 +19,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IJobRepository extends CrudRepository<Job, String> {
 
-    @Query(value = "SELECT * FROM job  WHERE isdelete = 'false'", nativeQuery = true)
+    @Query(value = "SELECT * FROM job j  WHERE j.is_delete = 'false'", nativeQuery = true)
     List<Job> getAll();
-
-    @Query(value = "SELECT * FROM job  WHERE id = ?1", nativeQuery = true)
-    public Job findJobId(String id);
-
-    @Modifying
-    @Query(value = "SELECT * FROM job  WHERE id = ?1", nativeQuery = true)
-    public void deleteById(String id);
+//    
+//    @Query(value = "SELECT * FROM job j WHERE j.id = ?", nativeQuery = true)
+//    public Job findJobId(String id);
+////
+//    @Modifying
+//    @Query(value = "SELECT * FROM job  WHERE id = ?1", nativeQuery = true)
+//    public void deleteById(String id);
 
 }

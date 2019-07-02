@@ -44,8 +44,9 @@ public class AnnualLeave implements Serializable {
     private int remain;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_delete")
-    private boolean isDelete;
+    private String isDelete;
 
     public AnnualLeave() {
     }
@@ -54,7 +55,7 @@ public class AnnualLeave implements Serializable {
         this.id = id;
     }
 
-    public AnnualLeave(String id, int remain, boolean isDelete) {
+    public AnnualLeave(String id, int remain, String isDelete) {
         this.id = id;
         this.remain = remain;
         this.isDelete = isDelete;
@@ -76,11 +77,11 @@ public class AnnualLeave implements Serializable {
         this.remain = remain;
     }
 
-    public boolean getIsDelete() {
+    public String getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(boolean isDelete) {
+    public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
     }
 

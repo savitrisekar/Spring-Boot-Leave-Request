@@ -59,12 +59,14 @@ public class Account implements Serializable {
     private byte[] image;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_delete")
-    private boolean isDelete;
+    private String isDelete;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_active")
-    private boolean isActive;
+    private String isActive;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
@@ -76,7 +78,7 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String id, String username, String password, boolean isDelete, boolean isActive) {
+    public Account(String id, String username, String password, String isDelete, String isActive) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -116,19 +118,19 @@ public class Account implements Serializable {
         this.image = image;
     }
 
-    public boolean getIsDelete() {
+    public String getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(boolean isDelete) {
+    public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
     }
 
-    public boolean getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
+    public void setIsActive(String isActive) {
         this.isActive = isActive;
     }
 

@@ -32,59 +32,59 @@
 
     <body>
         <!-- Modal AddJob -->
-        <div class="modal fade" id="AddJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--        <div class="modal fade" id="AddRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Add Job</h4>
+                        <h4 class="modal-title" id="myModalLabel">Add Role</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <div class="form-panel">
                                     <div class=" form">
-                                        <form th:action="@{/addJob}" method="post" class="form-horizontal">
+                                        <form th:action="@{/addRole}" method="post" class="form-horizontal">
                                             <div class="form-group ">
-                                                <label for="name" class="control-label col-lg-2">Job</label>
+                                                <label for="name" class="control-label col-lg-2">Role</label>
                                                 <div class="col-sm-9">
-                                                    <input id="name" name="name" type="text" class="form-control" placeholder="name job">
+                                                    <input id="name" name="name" type="text" class="form-control" placeholder="Name role">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button class="btn btn-theme btnSave" type="submit" value = "Add Job">Save</button>
+                                                    <button class="btn btn-theme" type="submit" value = "Add Role">Save</button>
                                                     <button class="btn btn-theme04" type="button">Cancel</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- /form-panel -->
+                                 /form-panel 
                             </div>
-                            <!-- /col-lg-12 -->
+                             /col-lg-12 
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- End Modal AddJob -->
         <!-- Modal Edit -->
-        <div class="modal fade" id="EditJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="EditRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
+                        <h4 class="modal-title" id="myModalLabel">Edit Role</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <div class="form-panel">
                                     <div class=" form">
-                                        <form class="cmxform form-horizontal style-form" id="commentForm" method="post" action="${pageContext.request.contextPath}/job">
+                                        <form class="cmxform form-horizontal style-form" id="commentForm" method="get" action="">
                                             <div class="form-group ">
-                                                <label for="id" class="control-label col-lg-2">Id</label>
+                                                <label for="cname" class="control-label col-lg-2">Id</label>
                                                 <div class="col-lg-10">
                                                     <input class=" form-control" id="idname" name="id" type="text" readonly />
                                                 </div>
@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button class="btn btn-theme btnSave" type="submit">Save</button>
+                                                    <button class="btn btn-theme" type="submit">Save</button>
                                                     <button class="btn btn-theme04" type="button">Cancel</button>
                                                 </div>
                                             </div>
@@ -157,8 +157,8 @@
                             <ul class="sub">
                                 <li><a th:href="@{/account}">Account</a></li>
                                 <li><a th:href="@{/employee}">Employee</a></li>
-                                <li class="active"><a th:href="@{/job}">Job</a></li>
-                                <li><a th:href="@{/role}">Role</a></li>
+                                <li><a th:href="@{/job}">Job</a></li>
+                                <li class="active"><a th:href="@{/role}">Role</a></li>
                             </ul>
                         </li>
                         <li class="sub-menu">
@@ -182,51 +182,18 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i>  Table Jobs</h3>
+                    <h3><i class="fa fa-angle-right"></i>  Role Employee</h3>
                     <div class="row mb">
                         <!-- page start-->
                         <div class="content-panel">
-                            <button type="button" class="btn btn-primary" style="margin-bottom: 15px;" data-toggle="modal" data-target="#AddJob"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add Data</button>
+                            <!--<button type="button" class="btn btn-primary" style="margin-bottom: 15px;" data-toggle="modal" data-target="#AddJob"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add Data</button>-->
                             <div class="adv-table">
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
                                         <tr>
-                                            <!--<th>No.</th>-->
-                                            <th>ID</th>
-                                            <th>Job Name</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!--<div th:with="i=0">-->
-                                        <tr th:each="Job:${dataJob}">
-                                            <!--<td th:text="i=${i+1}"></td>-->
-                                            <td th:text="${Job.id}"></td>
-                                            <td th:text="${Job.name}"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditJob"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                                <button type="button" class="btn btn-danger btn-sm btnDelete"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- page end-->
-                    </div>
-                    <h3><i class="fa fa-angle-right"></i> Job Employee</h3>
-                    <div class="row mb">
-                        <!-- page start-->
-                        <div class="content-panel">
-                            <div class="adv-table">
-                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info2">
-                                    <thead>
-                                        <tr>
-                                            <!--<th>No.</th>-->
                                             <th>ID</th>
                                             <th>Employee Name</th>
-                                            <th>Job</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -239,8 +206,8 @@
                                                     <p th:text="${list.role.name}"></p></a>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditJob" value="/{id}"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                                <button type="button" class="btn btn-danger btn-sm btnDelete"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditRole"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
+                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                             </td>
                                         </tr>
 
@@ -254,6 +221,8 @@
                 </section>
                 <!-- /wrapper -->
             </section>
+
+
 
             <!-- /MAIN CONTENT -->
             <!--main content end-->
@@ -291,78 +260,70 @@
         <!--common script for all pages-->
         <script src="dist/lib/common-scripts.js"></script>
         <!--script for this page-->
-        <!--sweet alert-->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.0/dist/sweetalert2.all.min.js"></script>
-        <script>
-            $(function () {
-                $('').dataTable({
-                    'paging': true,
-                    'lengthChange': true,
-                    'searching': true,
-                    language: {
-                        search: "INPUT",
-                        searchPlaceholder: "Search..."
-                    },
-                    'info': true,
-                    'autoWidth': true
-                });
-            });
-        </script>
-        <script>
-            $(function () {
-                var table = $('').dataTable();
 
-                $(' tbody').on('click', '.btnDelete', function () {
-                    var btn = $(this), id = btn.data('id');
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.value) {
-                            Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                    )
-                        }
-                    })
-                });
 
-            });
-        </script>
-        <script>
-            $(function () {
-                $('tbody').on('click', '.btnSave', function () {
-                    Swal.fire(
-                            'Good job!',
-                            'You clicked the button!',
-                            'success'
-                            )
-                });
-
-            });
-        </script>
 
         <script type="text/javascript">
+            /* Formating function for row details */
+            //            function fnFormatDetails(oTable, nTr) {
+            //                var aData = oTable.fnGetData(nTr);
+            //                var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            //                sOut += '<tr><td>Rendering engine:</td><td>' + aData[1] + ' ' + aData[4] + '</td></tr>';
+            //                sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+            //                sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+            //                sOut += '</table>';
+            //
+            //                return sOut;
+            //            }
 
             $(document).ready(function () {
+                /*
+                 * Insert a 'details' column to the table
+                 */
+                //                var nCloneTh = document.createElement('th');
+                //                var nCloneTd = document.createElement('td');
+                //                nCloneTd.innerHTML = '<img src="dist/lib/advanced-datatable/images/details_open.png">';
+                //                nCloneTd.className = "center";
+                //
+                //                $('#hidden-table-info thead tr').each(function () {
+                //                    this.insertBefore(nCloneTh, this.childNodes[0]);
+                //                });
+                //
+                //                $('#hidden-table-info tbody tr').each(function () {
+                //                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                //                });
+
+                /*
+                 * Initialse DataTables, with no sorting on the 'details' column
+                 */
                 var oTable = $('#hidden-table-info').dataTable({
+                    //                    "aoColumnDefs": [{
+                    //                            "bSortable": false,
+                    //                            "aTargets": [0]
+                    //                        }],
+                    //                    "aaSorting": [
+                    //                        [1, 'asc']
+                    //                    ]
                 });
+
+                /* Add event listener for opening and closing details
+                 * Note that the indicator for showing which row is open is not controlled by DataTables,
+                 * rather it is done here
+                 */
+                //                $('#hidden-table-info tbody td img').live('click', function () {
+                //                    var nTr = $(this).parents('tr')[0];
+                //                    if (oTable.fnIsOpen(nTr)) {
+                //                        /* This row is already open - close it */
+                //                        this.src = "lib/advanced-datatable/media/images/details_open.png";
+                //                        oTable.fnClose(nTr);
+                //                    } else {
+                //                        /* Open this row */
+                //                        this.src = "lib/advanced-datatable/images/details_close.png";
+                //                        oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                //                    }
+                //                });
             });
         </script>
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-                var oTable = $('#hidden-table-info2').dataTable({
-                });
-            });
-        </script>
-
     </body>
 
 </html>

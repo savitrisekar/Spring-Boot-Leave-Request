@@ -49,11 +49,9 @@
                                             <div class="form-group ">
                                                 <label for="cname" class="control-label col-lg-2">ID</label>
                                                 <div class="col-lg-10">
-                                                    <select class="form-control" id="manager" >
-                                                        <option value="volvo">10001 - Arif Fridasari</option>
-                                                        <option value="saab">10002 - Azifi </option>
-                                                        <option value="fiat">10003 - Gede</option>
-                                                        <option value="audi">10004 - Sekar</option>
+                                                    <select name="manager" id="manager" class="form-control">
+                                                        <option value="">-- Select Employee --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.id + ' - ' +data.firstName}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -95,7 +93,7 @@
         <!-- End Modal AddJob -->
 
         <!-- Modal Edit -->
-        <div class="modal fade" id="EditAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--        <div class="modal fade" id="EditAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,7 +109,7 @@
                                             <div class="form-group ">
                                                 <label for="cname" class="control-label col-lg-2">ID</label>
                                                 <div class="col-lg-10">
-                                                     <input class="form-control " id="id" name="id" type="text" readonly />
+                                                    <input class="form-control " id="id" name="id" type="text" readonly />
                                                 </div>
                                             </div>
                                             <div class="form-group ">
@@ -122,10 +120,10 @@
                                             </div>
                                             <div class="form-group ">
                                                 <label for="cname" class="control-label col-lg-2">Status</label>
-                                                <div class="col-lg-10">
-                                                    <select class="form-control" id="status" >
-                                                        <option value="active">Active</option>
-                                                        <option value="nonaktif">Non Active </option>
+                                                <div class="col-sm-9">
+                                                    <select name="status" id="manager" class="form-control">
+                                                        <option value="">-- Select Status --</option>
+                                                        <option th:each="data:${dataAccount}" th:value="${data.id}" th:text="${data.isActive}? 'Active' : 'Not Active'"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -138,14 +136,14 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- /form-panel -->
+                                 /form-panel 
                             </div>
-                            <!-- /col-lg-12 -->
+                             /col-lg-12 
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- End Modal Edit -->
 
 
@@ -159,7 +157,7 @@
                     <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
                 </div>
                 <!--logo start-->
-                <a th:href="@{/home}"class="logo"><b>Leave<span> Request</span></b></a>
+                <a th:href="@{/home}"class="logo"><b>Admin<span> LeReq</span></b></a>
                 <!--logo end-->
 
                 <div class="top-menu">
@@ -194,18 +192,17 @@
                                 <li class="active"><a th:href="@{/account}">Account</a></li>
                                 <li><a th:href="@{/employee}">Employee</a></li>
                                 <li><a th:href="@{/job}">Job</a></li>
+                                <li><a th:href="@{/role}">Role</a></li>
                             </ul>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-tasks"></i>
-                                <span>List Request</span>
+                                <span>Request</span>
                             </a>
                             <ul class="sub">
                                 <li><a th:href="@{/listrequest}">List Request</a></li>
-                                <li><a th:href="@{/pending}">List Pending</a></li>
-                                <li><a th:href="@{/reject}">List Reject</a></li>
-                                <li><a th:href="@{/aproval}">List Aproval</a></li>
+                                <li><a th:href="@{/history}">History</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -238,9 +235,9 @@
                                         <tr th:each="Account:${dataAccount}">
                                             <td th:text="${Account.id}"></td>
                                             <td th:text="${Account.username}"></td>
-                                            <td th:text="${Account.isActive}"></td>
+                                            <td th:text="${Account.isActive}? 'Active' : 'Not Active'"></td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditAccount"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
+                                                <!--<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditAccount"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>-->
                                                 <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                             </td>
                                         </tr>

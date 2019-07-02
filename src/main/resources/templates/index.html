@@ -37,9 +37,9 @@
                     <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
                 </div>
                 <!--logo start-->
-                <a th:href="@{/home}"class="logo"><b>Leave<span> Request</span></b></a>
+                <a th:href="@{/home}"class="logo"><b>Admin<span> LeReq</span></b></a>
                 <!--logo end-->
-                
+
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
                         <li><a class="logout" th:href="@{/login}">Logout</a></li>
@@ -58,7 +58,7 @@
                         <p class="centered"><a href="profile.html"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
-                            <a class="active" th:href="@{/}">
+                            <a class="active" th:href="@{/home}">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -72,18 +72,17 @@
                                 <li><a th:href="@{/account}">Account</a></li>
                                 <li><a th:href="@{/employee}">Employee</a></li>
                                 <li><a th:href="@{/job}">Job</a></li>
+                                <li><a th:href="@{/role}">Role</a></li>
                             </ul>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-tasks"></i>
-                                <span>List Request</span>
+                                <span>Request</span>
                             </a>
                             <ul class="sub">
-                               <li><a th:href="@{/listrequest}">List Request</a></li>
-                               <li><a th:href="@{/pending}">List Pending</a></li>
-                               <li><a th:href="@{/reject}">List Reject</a></li>
-                               <li><a th:href="@{/aproval}">List Aproval</a></li>
+                                <li><a th:href="@{/listrequest}">List Request</a></li>
+                                <li><a th:href="@{/history}">History</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -183,13 +182,13 @@
                                         <canvas id="serverstatus02" height="120" width="120"></canvas>
                                         <script>
                                             var doughnutData = [{
-                                            value: 60,
+                                                    value: 60,
                                                     color: "#1c9ca7"
-                                            },
-                                            {
-                                            value: 40,
+                                                },
+                                                {
+                                                    value: 40,
                                                     color: "#f68275"
-                                            }
+                                                }
                                             ];
                                             var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
                                         </script>
@@ -341,13 +340,13 @@
                                         <canvas id="serverstatus03" height="120" width="120"></canvas>
                                         <script>
                                             var doughnutData = [{
-                                            value: 60,
+                                                    value: 60,
                                                     color: "#2b2b2b"
-                                            },
-                                            {
-                                            value: 40,
+                                                },
+                                                {
+                                                    value: 40,
                                                     color: "#fffffd"
-                                            }
+                                                }
                                             ];
                                             var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
                                         </script>
@@ -572,8 +571,9 @@
                     // (string | optional) the class name you want to apply to that specific message
                     class_name: 'my-sticky-class'
             });
-            return false;
-            });
+                    return false;
+            }
+            );
         </script>
         <script type="application/javascript">
             $(document).ready(function() {
