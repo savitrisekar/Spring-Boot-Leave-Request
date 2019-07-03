@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div th:fragment="m_listrequest">
+    
+    <!-- Modal Edit -->
+    <div class="modal fade" id="Approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Approval</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <div class=" form">
+                                    <form th:action="@{/requestEdit/id}" method="post" class="cmxform form-horizontal style-form">
+                                        <div class="form-group ">
+                                            <label for="id" class="control-label col-lg-2">Id</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" id="id" name="id" type="text" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="name" class="control-label col-lg-2">Requester</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" id="name" name="name" minlength="2" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button class="btn btn-theme btnSave" type="submit" >Approved</button>
+                                                <button class="btn btn-theme04" type="button" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

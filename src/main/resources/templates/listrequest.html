@@ -3,6 +3,7 @@
 
     <head><title>List Request</title></head>
     <div th:replace="header :: headercss"></div>
+    <div th:replace="m_listrequest :: m_listrequest"></div>
 
     <body>
         <section id="container">
@@ -105,7 +106,7 @@
                                             <td th:text="${LR.totalLeave}"></td>
                                             <td th:text="${LR.status.name}"></td>
                                             <td>
-                                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Approved</button>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Approval"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Approved</button><br><br>
                                                 <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i>&nbsp;&nbsp;Rejected</button>
                                             </td>
                                         </tr>

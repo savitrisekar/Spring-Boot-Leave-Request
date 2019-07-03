@@ -17,13 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class LeaveRequestService {
 
-        @Autowired
-        private ILeaveRequestRepository leaveRequestRepository;
+    @Autowired
+    private ILeaveRequestRepository leaveRequestRepository;
 
-        public Iterable<LeaveRequest> findAllLR() {
-            return leaveRequestRepository.findAll();
-        }
+    public Iterable<LeaveRequest> findAllLR() {
+        return leaveRequestRepository.findAll();
+    }
 
-    
+//    public void LeaveRequest getById() {
+//        return leaveRequestRepository.getById();
+//    }
 
 }

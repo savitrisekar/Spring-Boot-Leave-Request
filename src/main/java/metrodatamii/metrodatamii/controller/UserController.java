@@ -45,7 +45,7 @@ public class UserController {
         status.setId(1);
         leaveRequest.setStatus(status);
         leaveRequestRepository.save(leaveRequest);
-        return "redirect:/user";
+        return "redirect:/user/request";
     }
 
     @GetMapping("/user/request")

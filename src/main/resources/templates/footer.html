@@ -52,6 +52,7 @@ and open the template in the editor.
                             $tds = $row.find("td");
 
                     $("#id").val($row.find('td:eq(0)').text());
+                    $("#name").val($row.find('td:eq(1)').text());
 
                     document.getElementById('getId').value = $row.find('td:eq(0)').text();
                     document.getElementById('getName').value = $row.find('td:eq(1)').text();

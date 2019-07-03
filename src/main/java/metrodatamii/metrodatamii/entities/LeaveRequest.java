@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -31,7 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "leave_request")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "LeaveRequest.findAll", query = "SELECT l FROM LeaveRequest l")})
+    @NamedQuery(name = "LeaveRequest.findAll", query = "SELECT l FROM LeaveRequest l")
+    , @NamedQuery(name = "LeaveRequest.findById", query = "SELECT l FROM LeaveRequest l WHERE l.id = :id")
+    , @NamedQuery(name = "LeaveRequest.findByStartDate", query = "SELECT l FROM LeaveRequest l WHERE l.startDate = :startDate")
+    , @NamedQuery(name = "LeaveRequest.findByEndDate", query = "SELECT l FROM LeaveRequest l WHERE l.endDate = :endDate")
+    , @NamedQuery(name = "LeaveRequest.findByNotes", query = "SELECT l FROM LeaveRequest l WHERE l.notes = :notes")
+    , @NamedQuery(name = "LeaveRequest.findByTotalLeave", query = "SELECT l FROM LeaveRequest l WHERE l.totalLeave = :totalLeave")})
 public class LeaveRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,12 +50,14 @@ public class LeaveRequest implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
     @Basic(optional = false)
     @NotNull
@@ -170,5 +178,5 @@ public class LeaveRequest implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.LeaveRequest[ id=" + id + " ]";
     }
-    
+
 }

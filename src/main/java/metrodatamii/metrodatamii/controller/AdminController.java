@@ -8,6 +8,7 @@ package metrodatamii.metrodatamii.controller;
 import javax.validation.Valid;
 import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
+import metrodatamii.metrodatamii.entities.LeaveRequest;
 import metrodatamii.metrodatamii.entities.Role;
 import metrodatamii.metrodatamii.repository.IEmployeeRepository;
 import metrodatamii.metrodatamii.repository.IJobRepository;
@@ -123,6 +124,11 @@ public class AdminController {
     @GetMapping("/listrequest")
     public String listreq(Model model) {
         model.addAttribute("dataLR", leaveRequestRepository.getByStatusPending());
+        return "listrequest";
+    }
+    
+    @PostMapping("/requestEdit/{id}")
+    public String approval(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest ) {
         return "listrequest";
     }
 
