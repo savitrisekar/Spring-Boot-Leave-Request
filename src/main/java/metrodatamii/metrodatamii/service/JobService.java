@@ -26,16 +26,5 @@ public class JobService {
         return jobRepository.getAll();
     }
 
-//    public Job saveJob(Job job) {
-//        return jobRepository.save(job);
-//    }
-//
-//    public Job findById(String id) {
-//        return jobRepository.findJobId(id);
-//    }
-//
-//    public void deleteById(String id) {
-//        jobRepository.deleteById(id);
-//    }
 
 }

@@ -103,7 +103,7 @@
                                             <td th:text="${Emp.phoneNumber}"></td>
                                             <td th:text="${Emp.manager.firstName+' '+Emp.manager.lastName}"></td>
                                             <td>
-                                                <a th:href="@{/findEmp/(id=${Emp.id})}" class="btn btn-success btn btn-sm eBtn"><i class="fa fa-edit" ></i>Edit</a>
+                                                <a th:href="@{/findEmp/(id=${Emp.id})}" class="btn btn-success btn btn-sm eBtn"><i class="fa fa-edit" ></i>Edit</a><br><br>
                                                     
                                                 <!--<a  id="editEmp" type="button" class="btn btn-success btn-sm" th:href="@{/findEmp/(id=${Emp.id})}"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</a>-->
                                                 <a type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>

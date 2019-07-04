@@ -98,7 +98,7 @@
                                             <td id="name" th:text="${Job.name}"></td>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-sm btnEdit" data-toggle="modal" data-target="#EditJob"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                                <button th:href="@{/jobDelete/(id=${Job.id})}" type="button" class="btn btn-danger btn-sm btnDelete"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                                <button type="button" class="btn btn-danger btn-sm btnDelete"data-toggle="modal" data-target="#DelJob"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                             </td>
                                         </tr>
 

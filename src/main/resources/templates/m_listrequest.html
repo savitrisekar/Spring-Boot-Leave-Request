@@ -6,48 +6,6 @@ and open the template in the editor.
 -->
 <div th:fragment="m_listrequest">
 
-    <!-- Modal Edit -->
-    <!--    <div class="modal fade" id="Approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Approval</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mt">
-                            <div class="col-lg-12">
-                                <div class="form-panel">
-                                    <div class=" form">
-                                        <form th:action="@{/leaveApproval/id}" method="post" class="cmxform form-horizontal style-form">
-                                            <div class="form-group ">
-                                                <label for="id" class="control-label col-lg-2">Id</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="id" name="id" type="text" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label for="status" class="control-label col-lg-2">Status</label>
-                                                <div class="col-lg-10">
-                                                    <input class="form-control" id="status" name="status" type="text" placeholder="status" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-lg-offset-2 col-lg-10">
-                                                    <button class="btn btn-theme btnSave" type="submit" >Approved</button>
-                                                    <button class="btn btn-theme04" type="button" data-dismiss="modal">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
     <div class="modal fade" id="Approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -62,9 +20,15 @@ and open the template in the editor.
                                 <div class=" form">
                                     <form th:action="@{/leaveApproval/id}" method="post" class="form-horizontal">
                                         <div class="form-group ">
-                                            <label for="id" class="control-label col-lg-3">id</label>
+                                            <label for="id" class="control-label col-lg-3">LR</label>
                                             <div class="col-lg-7">
                                                 <input class=" form-control" id="id" name="id" type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="requester" class="control-label col-lg-3">ID Emp</label>
+                                            <div class="col-lg-7">
+                                                <input class=" form-control" id="requester" name="requester" type="text"/>
                                             </div>
                                         </div>
                                         <div class="form-group ">
@@ -99,16 +63,14 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">
-                                                <button class="btn btn-theme" type="submit">Save</button>
+                                                <button class="btn btn-theme" type="submit">Approved</button>
                                                 <button class="btn btn-theme04" type="button">Cancel</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <!-- /form-panel -->
                         </div>
-                        <!-- /col-lg-12 -->
                     </div>
                 </div>
             </div>

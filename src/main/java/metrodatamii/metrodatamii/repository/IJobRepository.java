@@ -25,9 +25,6 @@ public interface IJobRepository extends CrudRepository<Job, String> {
 
     @Query(value = "UPDATE job SET is_delete = 'true' WHERE id=?1", nativeQuery = true)
     void softDelete(@PathVariable("id") String id);
-//
-//    @Modifying
-//    @Query(value = "SELECT * FROM job  WHERE id = 1", nativeQuery = true)
-//    public void deleteById(String id);
+
 
 }

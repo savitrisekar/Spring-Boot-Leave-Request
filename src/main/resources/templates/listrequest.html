@@ -99,7 +99,7 @@
                                         <tr th:each="LR:${dataLR}">
                                             <td id="id" th:text="${LR.id}"></td>
                                             <td th:text="${LR.requester.firstName}"></td>
-                                            <td th:text="${LR.type.name}"></td>
+                                            <td id="type" th:text="${LR.type.name}"></td>
                                             <td th:text="${LR.notes}"></td>
                                             <td th:text="${LR.startDate}"></td>
                                             <td th:text="${LR.endDate}"></td>

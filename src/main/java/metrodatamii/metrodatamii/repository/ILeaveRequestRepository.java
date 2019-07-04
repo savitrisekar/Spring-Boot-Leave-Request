@@ -24,6 +24,6 @@ public interface ILeaveRequestRepository extends CrudRepository<LeaveRequest, St
     List<LeaveRequest> getById();
 
     @Query(value = "UPDATE leave_request lr  SET lr.status = 2 WHERE lr.id =?1", nativeQuery = true)
-    void softDelete(String id);
+    void approved(String id);
 
 }
