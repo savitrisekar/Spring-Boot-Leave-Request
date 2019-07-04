@@ -9,6 +9,7 @@ import java.util.List;
 import metrodatamii.metrodatamii.entities.LeaveRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -18,7 +19,11 @@ public interface ILeaveRequestRepository extends CrudRepository<LeaveRequest, St
 
     @Query(value = "SELECT * FROM leave_request lr  WHERE lr.status = 1", nativeQuery = true)
     List<LeaveRequest> getByStatusPending();
-    
-    @Query(value = "SELECT * FROM leave_request lr  WHERE lr.id = ?", nativeQuery = true)
+
+    @Query(value = "SELECT * FROM leave_request lr  WHERE lr.id = ?1", nativeQuery = true)
     List<LeaveRequest> getById();
+
+    @Query(value = "UPDATE leave_request lr  SET lr.status = 2 WHERE lr.id =?1", nativeQuery = true)
+    void softDelete(String id);
+
 }

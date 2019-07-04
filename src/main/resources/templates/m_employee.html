@@ -21,7 +21,7 @@ and open the template in the editor.
                                 <div class="form">
                                     <form th:action="@{/addEmployee}" method="post" class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="firstname" class="col-sm-3  control-label">First Name</label>
+                                            <label for="firstame" class="col-sm-3  control-label">First Name</label>
                                             <div class="col-sm-9">
                                                 <input id="firstName" name="firstName" type="text" class="form-control" placeholder="input first name">
                                             </div>
@@ -79,80 +79,83 @@ and open the template in the editor.
     <!-- End Modal Employee -->
 
     <!-- Modal Edit Employee -->
-    <div class="modal fade" id="EditEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="form-panel">
-                                <div class="form">
-                                    <form class="form-horizontal" th:action="@{/employeeEdit/id}" method="post">
-                                        <div class="form-group">
-                                            <label for="id" class="control-label col-lg-2">Id</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="id" name="id" type="text" readonly />
+
+    <div class="myForm">
+        <div class="modal fade" id="EditEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="form-panel">
+                                    <div class="form">
+                                        <form class="form-horizontal" th:action="@{/employeeEdit/id}" method="post">
+                                            <div class="form-group">
+                                                <label for="id" class="control-label col-lg-2">Id</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="id" name="id" type="text" readonly />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="firstName" class="control-label col-lg-2">First name</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="first_Name" name="firstName" type="text" required />
+                                            <div class="form-group ">
+                                                <label for="firstName" class="control-label col-lg-2">First name</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="firstName" name="firstName" type="text" required />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="lastName" class="control-label col-lg-2">Last name</label>
-                                            <div class="col-lg-10">
-                                                <input class=" form-control" id="last_Name" name="lastName" type="text" required />
+                                            <div class="form-group ">
+                                                <label for="lastName" class="control-label col-lg-2">Last name</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="lastName" name="lastName" type="text" required />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="email" class="control-label col-lg-2">Email</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="email" name="email" type="email" />
+                                            <div class="form-group ">
+                                                <label for="email" class="control-label col-lg-2">Email</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="email" name="email" type="email" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="salary" class="control-label col-lg-2">Salary</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="salary" name="salary" type="number" />
+                                            <div class="form-group ">
+                                                <label for="salary" class="control-label col-lg-2">Salary</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="salary" name="salary" type="number" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="phoneNumber" class="control-label col-lg-2">Phone Number</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control " id="phoneNumber" name="phoneNumber" type="number" />
+                                            <div class="form-group ">
+                                                <label for="phoneNumber" class="control-label col-lg-2">Phone Number</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="phoneNumber" name="phoneNumber" type="text" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="manager" class="control-label col-lg-2">Manager</label>
-                                            <div class="col-lg-10">
-                                                <select name="manager" id="manager" class="form-control">
-                                                    <option value="">-- Select Manager --</option>
-                                                    <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
-                                                </select>
+                                            <div class="form-group ">
+                                                <label for="manager" class="control-label col-lg-2">Manager</label>
+                                                <div class="col-lg-10">
+                                                    <select name="manager" id="manager" class="form-control">
+                                                        <option value="">-- Select Manager --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <button class="btn btn-theme" type="submit">Save</button>
-                                                <button class="btn btn-theme04" type="button">Cancel</button>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-theme" type="submit">Save</button>
+                                                    <button class="btn btn-theme04" type="button">Cancel</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
+                                <!-- /form-panel -->
                             </div>
-                            <!-- /form-panel -->
+                            <!-- /col-lg-12 -->
                         </div>
-                        <!-- /col-lg-12 -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Modal Employee -->
-</div>
+        <!-- End Modal Employee -->
+    </div>

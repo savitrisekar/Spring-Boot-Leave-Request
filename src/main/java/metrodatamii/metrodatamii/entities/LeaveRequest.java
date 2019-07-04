@@ -51,13 +51,13 @@ public class LeaveRequest implements Serializable {
     @NotNull
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     @Basic(optional = false)
     @NotNull
@@ -78,6 +78,12 @@ public class LeaveRequest implements Serializable {
 
     public LeaveRequest() {
     }
+
+    public LeaveRequest(String id, Status status) {
+        this.id = id;
+        this.status = status;
+    }
+    
 
     public LeaveRequest(String id) {
         this.id = id;

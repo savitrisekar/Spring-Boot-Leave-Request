@@ -4,7 +4,7 @@
     <div th:replace="header :: headercss"></div>
     <body>
         <div th:replace="m_job :: m_job"></div>
-        
+
         <section id="container">
             <!-- **********************************************************************************************************************************************************
                 TOP BAR CONTENT & NOTIFICATIONS
@@ -33,7 +33,7 @@
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="dist/profile.html"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a th:href="@{/user/profile}"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
                             <a th:href="@{/home}">
@@ -79,6 +79,7 @@
                         <!-- page start-->
                         <div class="content-panel">
                             <button type="button" class="btn btn-primary" style="margin-bottom: 15px;" data-toggle="modal" data-target="#AddJob"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Add Data</button>
+                            <button type="button" class="btn btn-success btnPdf" style="margin-bottom: 15px;"><i class="fa fa-save"></i>&nbsp;&nbsp;Save to PDF</button>
                             <div class="adv-table">
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
@@ -94,10 +95,10 @@
                                         <tr th:each="Job:${dataJob}">
                                             <!--<td th:text="i=${i+1}"></td>-->
                                             <td id="id" th:text="${Job.id}"></td>
-                                            <td id="job_Name" th:text="${Job.name}"></td>
+                                            <td id="name" th:text="${Job.name}"></td>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-sm btnEdit" data-toggle="modal" data-target="#EditJob"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                                <button type="button" class="btn btn-danger btn-sm btnDelete" data-toggle="modal" data-target="#SoftDel"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                                <button th:href="@{/jobDelete/(id=${Job.id})}" type="button" class="btn btn-danger btn-sm btnDelete"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                             </td>
                                         </tr>
 

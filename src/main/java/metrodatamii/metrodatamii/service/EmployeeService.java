@@ -24,4 +24,5 @@ public class EmployeeService {
     public List<Employee> getAll() {
         return employeeRepository.getAll();
     }
+    
 }

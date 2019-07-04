@@ -34,7 +34,7 @@
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a href="dist/profile.html"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a th:href="@{/user/profile}"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
                             <a th:href="@{/home}">
@@ -97,16 +97,16 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="LR:${dataLR}">
-                                            <td th:text="${LR.id}"></td>
+                                            <td id="id" th:text="${LR.id}"></td>
                                             <td th:text="${LR.requester.firstName}"></td>
                                             <td th:text="${LR.type.name}"></td>
                                             <td th:text="${LR.notes}"></td>
                                             <td th:text="${LR.startDate}"></td>
                                             <td th:text="${LR.endDate}"></td>
                                             <td th:text="${LR.totalLeave}"></td>
-                                            <td th:text="${LR.status.name}"></td>
+                                            <td id="status" th:text="${LR.status.name}"></td>
                                             <td>
-                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Approval"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Approved</button><br><br>
+                                                <button type="button" class="btn btn-primary btn-sm btnEdit" data-toggle="modal" data-target="#Approval"><i class="fa fa-check"></i>&nbsp;&nbsp;Approved</button><br><br>
                                                 <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i>&nbsp;&nbsp;Rejected</button>
                                             </td>
                                         </tr>

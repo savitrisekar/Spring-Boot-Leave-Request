@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -21,9 +22,9 @@ public interface IJobRepository extends CrudRepository<Job, String> {
 
     @Query(value = "SELECT * FROM job  WHERE is_delete = 'false'", nativeQuery = true)
     List<Job> getAll();
-    
-//    @Query(value = "SELECT * FROM job j WHERE j.id = 1", nativeQuery = true)
-//    public Job findJobId(String id);
+
+    @Query(value = "UPDATE job SET is_delete = 'true' WHERE id=?1", nativeQuery = true)
+    void softDelete(@PathVariable("id") String id);
 //
 //    @Modifying
 //    @Query(value = "SELECT * FROM job  WHERE id = 1", nativeQuery = true)

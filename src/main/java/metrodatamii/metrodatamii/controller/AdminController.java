@@ -10,6 +10,7 @@ import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.LeaveRequest;
 import metrodatamii.metrodatamii.entities.Role;
+import metrodatamii.metrodatamii.entities.Status;
 import metrodatamii.metrodatamii.repository.IEmployeeRepository;
 import metrodatamii.metrodatamii.repository.IJobRepository;
 import metrodatamii.metrodatamii.repository.ILeaveRequestRepository;
@@ -27,6 +28,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -78,11 +81,26 @@ public class AdminController {
         return "employee";
     }
 
-    @PostMapping("/employeeEdit/{id}")
-    public String updateEmp(@PathVariable("id") String id, @Valid Employee employee) {
+    @PostMapping("/employeeEdit/id")
+    public String updateEmp(Employee employee) {
         employee.setIsDelete("false");
         employeeRepository.save(employee);
         return "redirect:/employee";
+    }
+
+    @GetMapping("/findEmp")
+    @ResponseBody
+    public Employee employee(String id) {
+        Employee emp = new Employee(
+                employeeRepository.getEmployeeById(id).get(0).getId(),
+                employeeRepository.getEmployeeById(id).get(0).getFirstName(),
+                employeeRepository.getEmployeeById(id).get(0).getLastName(),
+                employeeRepository.getEmployeeById(id).get(0).getEmail(),
+                employeeRepository.getEmployeeById(id).get(0).getSalary(),
+                employeeRepository.getEmployeeById(id).get(0).getPhoneNumber(),
+                employeeRepository.getEmployeeById(id).get(0).getManager().getId()
+        );
+        return emp;
     }
 
     @GetMapping("/account")
@@ -114,10 +132,9 @@ public class AdminController {
         return "redirect:/job";
     }
 
-    @PostMapping("/jobDelete/{id}")
+    @GetMapping("/jobDelete/{id}")
     public String softDelete(@PathVariable("id") String id, @Valid Job job) {
-        job.setIsDelete("true");
-        jobRepository.save(job);
+        jobRepository.softDelete(id);
         return "redirect:/job";
     }
 
@@ -126,10 +143,28 @@ public class AdminController {
         model.addAttribute("dataLR", leaveRequestRepository.getByStatusPending());
         return "listrequest";
     }
-    
-    @PostMapping("/requestEdit/{id}")
-    public String approval(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest ) {
-        return "listrequest";
+
+//    @RequestMapping("/leaveApproval")
+//    public String leaveRequest(String id) {
+//        leaveRequestRepository.softDelete("id");
+//        return "listrequest";
+//    }
+//    @GetMapping("/leaveApproval")
+//    @ResponseBody
+//    public LeaveRequest leaveRequest(String id) {
+//        LeaveRequest lr = new LeaveRequest();
+//        lr.setId(id);
+//        leaveRequestRepository.softDelete(id);
+//        return lr;
+//    }
+    @PostMapping("/leaveApproval/{id}")
+    @ResponseBody
+    public String upadateData(@PathVariable("id") String id) {
+//        Status status = new Status();
+//        status.setId(2);
+//        leaveRequest.setStatus(status);
+        leaveRequestRepository.softDelete(id);
+        return "redirect:/listrequest";
     }
 
     @GetMapping("/history")

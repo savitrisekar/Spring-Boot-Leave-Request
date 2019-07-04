@@ -78,16 +78,29 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="startDate" class="control-label col-md-3">Start Date</label>
-                                                <div class="col-md-7 col-xs-10 col-lg-7">
-                                                    <input id= "startDate" name="startDate" class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" required>
+                                                <label for="startDate" class="control-label col-md-3">Start with years viewMode</label>
+                                                <div class="col-md-3 col-xs-11">
+                                                    <input id="startDate" type="date" name="startDate" class="dateOK">
+                                                    <!--                                                    <div data-date-viewmode="day" data-date-format="yyyy-dd-mm" data-date="03-07-2019" class="input-append date dpYears">
+                                                                                                            <input id="startDate" name="startDate"  type="text" readonly="" value="03-07-2019" size="16" class="form-control">
+                                                                                                            <span class="input-group-btn add-on">
+                                                                                                                <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+                                                                                                            </span>
+                                                                                                        </div>-->
+                                                    <span class="help-block">Select date</span>
                                                 </div>
                                             </div>
-                                            <div for="endDate" class="form-group">
-                                                <label class="control-label col-md-3">End Date</label>
-                                                <div class="col-md-7 col-xs-10 col-lg-7">
-                                                    <input  id="endDate" name="endDate" class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" required>
-
+                                            <div class="form-group">
+                                                <label  for="endDate" class="control-label col-md-3">Start with years viewMode</label>
+                                                <div class="col-md-3 col-xs-11">
+                                                    <input id="endDate" type="date" name="endDate" class="dateOK">
+                                                    <!--                                                    <div data-date-viewmode="day" data-date-format="yyyy-dd-mm" data-date="03-07-2019" class="input-append date dpYears">
+                                                                                                            <input id="endDate" name="endDate" type="text" readonly="" value="03-07-2019" size="16" class="form-control">
+                                                                                                            <span class="input-group-btn add-on">
+                                                                                                                <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+                                                                                                            </span>
+                                                                                                        </div>-->
+                                                    <span class="help-block">Select date</span>
                                                 </div>
                                             </div>
                                             <!--                                        <div class="form-group ">
@@ -287,38 +300,31 @@
                 });
             });
         </script>
-<!--        <script>
-            $(function () {
-                $("#.datepicker").datepicker({
-                    //beforeShowDay: $.datepicker.noWeekends,
-                    format: 'yyyy-dd-mm',
-
-                });
-            });
-        </script>-->
         <script>
-            jQuery('.default-date-picker').datepicker({
-                format: 'yyyy-dd-mm'
-            });
-        </script>
+            $(document).ready(function () {
+               
+                datesToBeDisabled = ["07/13/2019"];
 
-        <!--        <script type="text/javascript">
-                    var date = new Date();
-                    var start_date = date.toISOString().slice(0, 10);
-                    document.getElementById('start_date').value = start_date;
-                    document.getElementById('Employee').value = 2;
-                    document.getElementById('Manager').value = 2;
-                    document.getElementById('Status').value = "Submited";
-                </script>-->
+                $('.dateOK').date({
+                    changeMonth: true,
+                    changeYear: true,
+                    minDate: 0,
+                    todayHighlight: 1,
+                    beforeShowDay: function (date) {
+                        var dateStr = jQuery.date.formatDate('yy-mm-dd', date);
+                        return [datesToBeDisabled.indexOf(dateStr) == -1];
+                    },
 
-<!--        <script>
-            $(function () {
-//                $("#default-date-picker").datepicker( "setDate" , "7/11/2011" );
-                $(".default-date-picker").datepicker({
-                    dateFormat: 'yy/mm/dd'
                 });
             });
-        </script>-->
+
+        </script>
+        <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+            <p>Select Date: <input type="text" class="datepicker"></p>-->
 
     </body>
 
