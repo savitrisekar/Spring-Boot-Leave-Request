@@ -70,7 +70,7 @@ and open the template in the editor.
 
         <script>
             $(document).ready(function () {
-                $('#EditJob').on('click', function (event) {
+                $('#EditJob').on('show.bs.modal', function (e){
                     event.preventDefault();
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
@@ -81,17 +81,46 @@ and open the template in the editor.
                 })
             })
         </script>
-        <!--        <script>
-                    $(document).ready(function () {
-                        $('#Approval').on('click', function (event) {
-                            event.preventDefault();
-                            var _button = $(e.relatedTarget);
-                            var _row = _button.parents("tr");
-                            var _app = _row.find("#id").text();
-                            $(this).find("#id").val(_app);
-                        })
-                    })
-                </script>-->
+        <script>
+            $(document).ready(function () {
+                $('#Approval').on('show.bs.modal', function (e) {
+                    event.preventDefault();
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _id = _row.find("#id").text();
+                    var _type = _row.find("#type").text();
+                    var _startDate = _row.find("#startDate").text();
+                    var _endDate = _row.find("#endDate").text();
+                    var _notes = _row.find("#notes").text();
+                    var _status = _row.find("#status").text();
+                    $(this).find("#id").val(_id);
+                    $(this).find("#type").val(_type);
+                    $(this).find("#startDate").val(_startDate);
+                    $(this).find("#endDate").val(_endDate);
+                    $(this).find("#notes").val(_notes);
+                })
+            })
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#Approval').on('show.bs.modal', function (e) {
+                    event.preventDefault();
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _id = _row.find("#id").text();
+                    var _type = _row.find("#type").text();
+                    var _startDate = _row.find("#startDate").text();
+                    var _endDate = _row.find("#endDate").text();
+                    var _notes = _row.find("#notes").text();
+                    var _status = _row.find("#status").text();
+                    $(this).find("#id").val(_id);
+                    $(this).find("#type").val(_type);
+                    $(this).find("#startDate").val(_startDate);
+                    $(this).find("#endDate").val(_endDate);
+                    $(this).find("#notes").val(_notes);
+                })
+            })
+        </script>
 
         <script>
             $(document).ready(function () {
@@ -233,7 +262,7 @@ and open the template in the editor.
 
             $(document).ready(function () {
                 var oTable = $('#hidden-table-info2').dataTable({
-
+                    
                 });
             });
         </script>
@@ -242,18 +271,13 @@ and open the template in the editor.
         <!--        <script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
                 <script src="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"></script>-->
         <script type="text/javascript">
-            var table = $('#hidden-table-info').dataTable({
-                buttons: [
-                    {
-                        extend: 'pdf',
-                        text: 'Save current page',
-                        exportOptions: {
-                            modifier: {
-                                page: 'current'
-                            }
-                        }
-                    }
-                ]
+            $(document).ready(function () {
+                $('#hidden-table-info').dataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'print'
+                    ]
+                });
             });
         </script>
     </div>

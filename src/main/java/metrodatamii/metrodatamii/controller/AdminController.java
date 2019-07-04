@@ -159,11 +159,11 @@ public class AdminController {
 //    }
     @PostMapping("/leaveApproval/{id}")
     @ResponseBody
-    public String upadateData(@PathVariable("id") String id) {
-//        Status status = new Status();
-//        status.setId(2);
-//        leaveRequest.setStatus(status);
-        leaveRequestRepository.softDelete(id);
+    public String upadateData(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest) {
+        Status status = new Status();
+        status.setId(2);
+        leaveRequest.setStatus(status);
+        leaveRequestRepository.save(leaveRequest);
         return "redirect:/listrequest";
     }
 
