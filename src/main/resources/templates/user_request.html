@@ -288,7 +288,7 @@
 
                 var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
                 var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
-                var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);
+                var result = ((date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000))+1;
                 $('#totalLeave').val(result);
             }
         </script>

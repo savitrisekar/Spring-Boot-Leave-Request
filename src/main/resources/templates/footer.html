@@ -120,28 +120,30 @@ and open the template in the editor.
                     var _lrId = _row.find("#id").text();
                     var _lrReg = _row.find("#requester").text();
                     var _lrType = _row.find("#type").text();
-                    var _lrStDa = _row.find("#startDate").val();
-                    var _lrEnDa = _row.find("#endDate").val();
+                    var _lrStDa = _row.find("#startDate").text();
+                    var _lrEnDa = _row.find("#endDate").text();
                     var _lrNotes = _row.find("#notes").text();
-                    var _lrStatusNotes = _row.find("#statusNotes").text();
-//                    var _lrTot = _row.find("#totalLeave").text();
-//                    var _lrStat = _row.find("#status").text();
+                    
                     $(this).find("#id").val(_lrId);
                     $(this).find("#requester").val(_lrReg);
                     $(this).find("#type").val(_lrType);
                     $(this).find("#startDate").val(_lrStDa);
                     $(this).find("#endDate").val(_lrEnDa);
                     $(this).find("#notes").val(_lrNotes);
-                    $(this).find("#statusNotes").val(_lrStatusNotes);
-//                    $(this).find("#totalLeave").val(_lrTot);
-//                    $(this).find("#status").val(_lrStat);
 
-//                    var start_date = $('#startDate').val();
-//                    var end_date = $('#endDate').val();
 
+                    var separate_start_date = _lrStDa.split('-');
+                    var separate_end_date = _lrEnDa.split('-');
+                    var object_date = new Date();
+
+                    var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
+                    var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
+                    var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);
+                    $('#totalLeave').val(result);
                 })
             })
         </script>
+        
 
         <!--        <script>
                     $(document).ready(function () {

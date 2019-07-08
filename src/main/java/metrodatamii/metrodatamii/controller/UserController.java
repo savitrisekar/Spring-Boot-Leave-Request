@@ -56,7 +56,7 @@ public class UserController {
     public String userHistory(Model model) {
         model.addAttribute("dataEmployee", employeeService.getAll());
         model.addAttribute("dataType", typeService.findAllType());
-        model.addAttribute("dataLR", leaveRequestRepository.getByStatusPending());
+        model.addAttribute("dataLR", leaveRequestRepository.getByStatus());
         return "user_request";
     }
 
