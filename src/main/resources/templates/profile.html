@@ -167,26 +167,38 @@
                 MAIN SIDEBAR MENU
                 *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
-            <aside>
+           <aside>
                 <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a th:href="@{/user/profile}"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
+                        <p class="centered"><a th:href="@{/home/profile}"><img th:src="@{/dist/img/ui-sam.jpg}" class="img-circle" width="80"></a></p>
                         <h5 class="centered">Arif Fridasari</h5>
                         <li class="mt">
-                            <a class="active" th:href="@{/user}">
+                            <a class="active" th:href="@{/home}">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-edit"></i>
-                                <span>Leave Request</span>
+                                <i class="fa fa-th"></i>
+                                <span>Data</span>
                             </a>
                             <ul class="sub">
-                                <li><a th:href="@{/user/request}">Request</a></li>
-                                <li><a th:href="@{/user/information}">Information</a></li>
+                                <li><a th:href="@{/account}">Account</a></li>
+                                <li><a th:href="@{/employee}">Employee</a></li>
+                                <li><a th:href="@{/job}">Job</a></li>
+                                <li><a th:href="@{/role}">Role</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-tasks"></i>
+                                <span>Request</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a th:href="@{/listrequest}">List Request</a></li>
+                                <li><a th:href="@{/history}">History</a></li>
                             </ul>
                         </li>
                     </ul>

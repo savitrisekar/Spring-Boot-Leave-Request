@@ -5,6 +5,8 @@
  */
 package metrodatamii.metrodatamii.controller;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import metrodatamii.metrodatamii.entities.Account;
 import metrodatamii.metrodatamii.entities.Employee;
@@ -25,6 +27,8 @@ import metrodatamii.metrodatamii.service.LeaveRequestService;
 import metrodatamii.metrodatamii.service.LeaveTypeService;
 import metrodatamii.metrodatamii.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +37,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -75,16 +80,24 @@ public class AdminController {
     @Autowired
     private IEmployeeRepository employeeRepository;
 
-    @GetMapping("/")
+    @RequestMapping(value = {"/", "", "/login"}, method = RequestMethod.GET)
     public String login(Model model) {
         return "login";
     }
 
-    @GetMapping("/home")
+    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
     public String home(Model model) {
         return "index";
     }
+//    @GetMapping("/")
+//    public String login(Model model) {
+//        return "login";
+//    }
 
+//    @GetMapping("/home")
+//    public String home(Model model) {
+//        return "index";
+//    }
     @GetMapping("/employee")
     public String employee(Model model) {
         model.addAttribute("dataEmployee", employeeService.getAll());
@@ -126,6 +139,15 @@ public class AdminController {
         model.addAttribute("dataAccount", accountService.getAll());
         model.addAttribute("dataEmployee", employeeService.getAll());
         return "account";
+    }
+
+   @PostMapping("/addDataAcc")
+    public String account(Account account, String password) {
+        account.setIsDelete("false");
+        account.setIsActive("false");
+        account.setPassword(new BCryptPasswordEncoder().encode(password));
+        accountRepository.save(account);
+        return "redirect:/account";
     }
 
     @PostMapping("/accountDelete/{id}")
@@ -245,6 +267,39 @@ public class AdminController {
         role.setIsDelete("false");
         roleRepository.save(role);
         return "redirect:/role";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "error/404";
+    }
+
+    @GetMapping("/500")
+    public String error500() {
+        return "error/500";
+    }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String handleError(HttpServletRequest request) {
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        if (status != null) {
+            Integer statusCode = Integer.valueOf(status.toString());
+
+            if (statusCode == HttpStatus.NOT_FOUND.value()) {
+                return "error/404";
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                return "error/500";
+            } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
+                return "error/400";
+            }
+        }
+        return "error/error";
+    }
+
+    @GetMapping("/home/profile")
+    public String profile(Model model) {
+        return "profile";
     }
 
 }
