@@ -117,6 +117,81 @@
                 </div>
             </div>
         </div>
+        
+         <div class="modal fade" id="CancelReq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Cancel Leave Request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="form-panel">
+                                    <div class=" form">
+                                        <form th:action="@{/addRequest}" method="post" class="form-horizontal">
+                                            <div class="form-group ">
+                                                <label for="requester" class="control-label col-lg-3">Employee</label>
+                                                <div class="col-lg-7">
+                                                    <select name="requester" id="type" class="form-control">
+                                                        <option value="">-- Select Employee --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="type" class="control-label col-lg-3">Type Leave</label>
+                                                <div class="col-lg-7">
+                                                    <select name="type" id="type" class="form-control">
+                                                        <option value="">-- Select Type --</option>
+                                                        <option th:each="data:${dataType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="startDate" class="control-label col-md-3">Start Date</label>
+                                                <div class="col-md-3 col-xs-11">
+                                                    <input id="startDate" type="date" name="startDate" class="dateOK">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  for="endDate" class="control-label col-md-3">End Date</label>
+                                                <div class="col-md-3 col-xs-11">
+                                                    <input id="endDate" type="date" name="endDate" onchange="resultDate()" class="dateOK">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="totalLeave" class="control-label col-lg-3">Total Leave</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control" name="totalLeave" id="totalLeave">
+                                                    <div class="validate"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="notes" class="control-label col-lg-3">Notes</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" name="notes" id="notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                                                    <div class="validate"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-theme" type="submit">Save</button>
+                                                    <button class="btn btn-theme04" type="button">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /form-panel -->
+                            </div>
+                            <!-- /col-lg-12 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section id="container">
             <!-- **********************************************************************************************************************************************************
                 TOP BAR CONTENT & NOTIFICATIONS

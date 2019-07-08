@@ -20,7 +20,7 @@ public interface IEmployeeRepository extends CrudRepository<Employee, String> {
     List<Employee> getAll();
 
     @Query(value = "SELECT * FROM employee WHERE id = ?1", nativeQuery = true)
-    List<Employee> getEmployeeById(String id);
+    Employee getEmployeeById(String id);
 
 
 }

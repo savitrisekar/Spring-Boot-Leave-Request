@@ -59,7 +59,7 @@ public class AdminController {
 
     @Autowired
     private AccountService accountService;
-    
+
     @Autowired
     private IAccountRepository accountRepository;
 
@@ -108,14 +108,15 @@ public class AdminController {
     @GetMapping("/findEmp")
     @ResponseBody
     public Employee employee(String id) {
-        Employee emp = new Employee(
-                employeeRepository.getEmployeeById(id).get(0).getId(),
-                employeeRepository.getEmployeeById(id).get(0).getFirstName(),
-                employeeRepository.getEmployeeById(id).get(0).getLastName(),
-                employeeRepository.getEmployeeById(id).get(0).getEmail(),
-                employeeRepository.getEmployeeById(id).get(0).getSalary(),
-                employeeRepository.getEmployeeById(id).get(0).getPhoneNumber(),
-                employeeRepository.getEmployeeById(id).get(0).getManager().getId()
+        Employee emp = employeeRepository.getEmployeeById(id);
+        emp = new Employee(
+                emp.getId(),
+                emp.getFirstName(),
+                emp.getLastName(),
+                emp.getEmail(),
+                emp.getSalary(),
+                emp.getPhoneNumber(),
+                emp.getManager().getId()
         );
         return emp;
     }
@@ -126,6 +127,7 @@ public class AdminController {
         model.addAttribute("dataEmployee", employeeService.getAll());
         return "account";
     }
+
     @PostMapping("/accountDelete/{id}")
     public String softDelete(@PathVariable("id") String id, @Valid Account account) {
         account.setIsDelete("true");
@@ -187,11 +189,10 @@ public class AdminController {
 //        leaveRequestRepository.save(leaveRequest);
 //        return "redirect:/listrequest";
 //    }
-    
     @PostMapping("/leaveApproval/{id}")
     public String upadateData(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest
     ) {
-        
+
         Status status = new Status();
         status.setId(2);
         leaveRequest.setStatus(status);
@@ -205,11 +206,11 @@ public class AdminController {
         leaveRequestRepository.save(leaveRequest);
         return "redirect:/listrequest";
     }
-    
+
     @PostMapping("/leaveReject/{id}")
     public String rejectData(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest
     ) {
-        
+
         Status status = new Status();
         status.setId(3);
         leaveRequest.setStatus(status);
