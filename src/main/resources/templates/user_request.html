@@ -75,17 +75,22 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="startDate" class="control-label col-md-3">Start with years viewMode</label>
+                                                <label for="startDate" class="control-label col-md-3">Start Date</label>
                                                 <div class="col-md-3 col-xs-11">
                                                     <input id="startDate" type="date" name="startDate" class="dateOK">
-                                                    <span class="help-block">Select date</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label  for="endDate" class="control-label col-md-3">Start with years viewMode</label>
+                                                <label  for="endDate" class="control-label col-md-3">End Date</label>
                                                 <div class="col-md-3 col-xs-11">
-                                                    <input id="endDate" type="date" name="endDate" class="dateOK">
-                                                    <span class="help-block">Select date</span>
+                                                    <input id="endDate" type="date" name="endDate" onchange="resultDate()" class="dateOK">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="totalLeave" class="control-label col-lg-3">Total Leave</label>
+                                                <div class="col-lg-7">
+                                                    <input class="form-control" name="totalLeave" id="totalLeave">
+                                                    <div class="validate"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -192,13 +197,15 @@
                                     <tbody>
                                         <tr th:each="LR:${dataLR}">
                                             <td></td>
-                                            <td th:text="${LR.id}"></td>
-                                            <td th:text="${LR.type.name}"></td>
-                                            <td th:text="${LR.notes}"></td>
-                                            <td th:text="${LR.startDate}"></td>
-                                            <td th:text="${LR.endDate}"></td>
-                                            <td th:text="${LR.totalLeave}"></td>
-                                            <td th:text="${LR.status.name}"></td>
+                                            <td id="id" th:text="${LR.id}"></td>
+                                            <td id="type" th:text="${LR.type.name}"></td>
+                                            <td id="notes" th:text="${LR.notes}"></td>
+                                            <td id="startDate" th:text="${LR.startDate}"></td>
+                                            <td id="endDate" th:text="${LR.endDate}"></td>
+                                            <td id="totalLeave" th:text="${LR.totalLeave}"></td>
+                                            <td id="status" th:text="${LR.status.name}"></td>
+
+
                                             <td>
                                                 <!--<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Cancel</button>-->
                                                 <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i>&nbsp;&nbsp;Cancel</button>
@@ -271,7 +278,22 @@
         <script type="text/javascript" language="javascript" th:src="@{/dist/lib/advanced-datatable/js/jquery.dataTables.js}"></script>
         <script type="text/javascript" th:src="@{/dist/lib/advanced-datatable/js/DT_bootstrap.js}"></script>
 
+        <script>
+            function resultDate() {
+                var start_date = $('#startDate').val();
+                var end_date = $('#endDate').val();
+                var separate_start_date = start_date.split('-');
+                var separate_end_date = end_date.split('-');
+                var object_date = new Date();
 
+                var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
+                var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
+                var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);
+                $('#totalLeave').val(result);
+            }
+        </script>
+
+  
         <script type="text/javascript">
 
             $(document).ready(function () {
@@ -279,31 +301,26 @@
                 });
             });
         </script>
-        <script>
-            $(document).ready(function () {
-
-                datesToBeDisabled = ["07/13/2019"];
-
-                $('.dateOK').date({
-                    changeMonth: true,
-                    changeYear: true,
-                    minDate: 0,
-                    todayHighlight: 1,
-                    beforeShowDay: function (date) {
-                        var dateStr = jQuery.date.formatDate('yy-mm-dd', date);
-                        return [datesToBeDisabled.indexOf(dateStr) == -1];
-                    },
-
-                });
-            });
-
-        </script>
-        <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!--        <script>
+                    $(document).ready(function () {
         
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                        datesToBeDisabled = ["07/13/2019"];
         
-            <p>Select Date: <input type="text" class="datepicker"></p>-->
+                        $('.dateOK').date({
+                            changeMonth: true,
+                            changeYear: true,
+                            minDate: 0,
+                            todayHighlight: 1,
+                            beforeShowDay: function (date) {
+                                var dateStr = jQuery.date.formatDate('yy-mm-dd', date);
+                                return [datesToBeDisabled.indexOf(dateStr) == -1];
+                            },
+        
+                        });
+                    });
+        
+                </script>-->
+
 
     </body>
 
