@@ -20,10 +20,10 @@ public interface ILeaveRequestRepository extends CrudRepository<LeaveRequest, St
     @Query(value = "SELECT * FROM leave_request lr  WHERE lr.status = 1", nativeQuery = true)
     List<LeaveRequest> getByStatusPending();
 
-    @Query(value = "SELECT * FROM leave_request lr  WHERE lr.id = ?1", nativeQuery = true)
-    List<LeaveRequest> getById();
+    @Query(value = "SELECT * FROM leave_request WHERE id = ?1", nativeQuery = true)
+    List<LeaveRequest> getLrById(String id);
 
     @Query(value = "UPDATE leave_request lr  SET lr.status = 2 WHERE lr.id =?1", nativeQuery = true)
-    void approved(String id);
+    String approved(String id);
 
 }

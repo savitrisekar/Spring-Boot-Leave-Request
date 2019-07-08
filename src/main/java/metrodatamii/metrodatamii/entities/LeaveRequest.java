@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,7 +23,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -32,12 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "leave_request")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "LeaveRequest.findAll", query = "SELECT l FROM LeaveRequest l")
-    , @NamedQuery(name = "LeaveRequest.findById", query = "SELECT l FROM LeaveRequest l WHERE l.id = :id")
-    , @NamedQuery(name = "LeaveRequest.findByStartDate", query = "SELECT l FROM LeaveRequest l WHERE l.startDate = :startDate")
-    , @NamedQuery(name = "LeaveRequest.findByEndDate", query = "SELECT l FROM LeaveRequest l WHERE l.endDate = :endDate")
-    , @NamedQuery(name = "LeaveRequest.findByNotes", query = "SELECT l FROM LeaveRequest l WHERE l.notes = :notes")
-    , @NamedQuery(name = "LeaveRequest.findByTotalLeave", query = "SELECT l FROM LeaveRequest l WHERE l.totalLeave = :totalLeave")})
+    @NamedQuery(name = "LeaveRequest.findAll", query = "SELECT l FROM LeaveRequest l")})
 public class LeaveRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,13 +46,11 @@ public class LeaveRequest implements Serializable {
     @NotNull
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     @Basic(optional = false)
     @NotNull
@@ -66,6 +59,10 @@ public class LeaveRequest implements Serializable {
     private String notes;
     @Column(name = "total_leave")
     private Integer totalLeave;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "status_notes")
+    private String statusNotes;
     @JoinColumn(name = "requester", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Employee requester;
@@ -78,12 +75,6 @@ public class LeaveRequest implements Serializable {
 
     public LeaveRequest() {
     }
-
-    public LeaveRequest(String id, Status status) {
-        this.id = id;
-        this.status = status;
-    }
-    
 
     public LeaveRequest(String id) {
         this.id = id;
@@ -136,6 +127,14 @@ public class LeaveRequest implements Serializable {
         this.totalLeave = totalLeave;
     }
 
+    public String getStatusNotes() {
+        return statusNotes;
+    }
+
+    public void setStatusNotes(String statusNotes) {
+        this.statusNotes = statusNotes;
+    }
+
     public Employee getRequester() {
         return requester;
     }
@@ -184,5 +183,5 @@ public class LeaveRequest implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.LeaveRequest[ id=" + id + " ]";
     }
-
+    
 }

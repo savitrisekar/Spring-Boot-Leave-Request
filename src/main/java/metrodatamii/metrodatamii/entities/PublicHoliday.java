@@ -28,10 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "public_holiday")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PublicHoliday.findAll", query = "SELECT p FROM PublicHoliday p")
-    , @NamedQuery(name = "PublicHoliday.findById", query = "SELECT p FROM PublicHoliday p WHERE p.id = :id")
-    , @NamedQuery(name = "PublicHoliday.findByEvent", query = "SELECT p FROM PublicHoliday p WHERE p.event = :event")
-    , @NamedQuery(name = "PublicHoliday.findByDate", query = "SELECT p FROM PublicHoliday p WHERE p.date = :date")})
+    @NamedQuery(name = "PublicHoliday.findAll", query = "SELECT p FROM PublicHoliday p")})
 public class PublicHoliday implements Serializable {
 
     private static final long serialVersionUID = 1L;

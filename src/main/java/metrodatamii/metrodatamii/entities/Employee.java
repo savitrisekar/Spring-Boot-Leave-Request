@@ -33,14 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "employee")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
-    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
-    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
-    , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
-    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
-    , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
+    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -108,7 +101,7 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
         this.manager = manager;
     }
-    
+
     public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, String isDelete) {
         this.id = id;
         this.firstName = firstName;
@@ -118,7 +111,6 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
         this.isDelete = isDelete;
     }
-
 
     public String getId() {
         return id;
@@ -252,5 +244,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.Employee[ id=" + id + " ]";
     }
-    
+
 }

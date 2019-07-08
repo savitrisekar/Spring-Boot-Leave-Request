@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <div th:fragment="m_listrequest">
 
+<!--    <div class="FormApproval">
     <div class="modal fade" id="Approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -22,42 +23,55 @@ and open the template in the editor.
                                         <div class="form-group ">
                                             <label for="id" class="control-label col-lg-3">LR</label>
                                             <div class="col-lg-7">
-                                                <input class=" form-control" id="id" name="id" type="text"/>
+                                                <input class=" form-control" id="id" name="id" type="text" readonly/>
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <label for="requester" class="control-label col-lg-3">ID Emp</label>
+                                                <label for="requester" class="control-label col-lg-3">Employee</label>
+                                                <div class="col-lg-7">
+                                                    <select name="requester" id="type" class="form-control">
+                                                        <option value="">-- Select Employee --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="type" class="control-label col-lg-3">Type Leave</label>
+                                                <div class="col-lg-7">
+                                                    <select name="type" id="type" class="form-control">
+                                                        <option value="">-- Select Type --</option>
+                                                        <option th:each="data:${dataType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        <div class="form-group ">
+                                            <label for="requester" class="control-label col-lg-3">Employee</label>
                                             <div class="col-lg-7">
-                                                <input class=" form-control" id="requester" name="requester" type="text"/>
+                                                <input class=" form-control" id="requester" name="requester" type="text" readonly/>
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="type" class="control-label col-lg-3">Type Leave</label>
                                             <div class="col-lg-7">
-                                                <select name="type" id="type" class="form-control">
-                                                    <option value="">-- Select Type --</option>
-                                                    <option th:each="data:${dataType}" th:value="${data.id}" th:text="${data.name}"></option>
-                                                </select>
+                                                 <input class=" form-control" id="type" name="type" type="text" readonly/>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="startDate" class="control-label col-md-3">Start with years viewMode</label>
-                                            <div class="col-md-3 col-xs-11">
-                                                <input id="startDate" type="date" name="startDate" class="dateOK">
-                                                <span class="help-block">Select date</span>
+                                        <div class="form-group ">
+                                            <label for="startDate" class="control-label col-lg-3">Start Date</label>
+                                            <div class="col-lg-7">
+                                                 <input class=" form-control" id="startDate" name="startDate" type="text" readonly/>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label  for="endDate" class="control-label col-md-3">Start with years viewMode</label>
-                                            <div class="col-md-3 col-xs-11">
-                                                <input id="endDate" type="date" name="endDate" class="dateOK">
-                                                <span class="help-block">Select date</span>
+                                        <div class="form-group ">
+                                            <label for="endDate" class="control-label col-lg-3">End Date</label>
+                                            <div class="col-lg-7">
+                                                 <input class=" form-control" id="endDate" name="endDate" type="text" readonly/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="notes" class="control-label col-lg-3">Notes</label>
                                             <div class="col-lg-7">
-                                                <textarea class="form-control" name="notes" id="notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                                                <textarea class="form-control" name="notes" id="notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us" readonly></textarea>
                                                 <div class="validate"></div>
                                             </div>
                                         </div>
@@ -75,6 +89,6 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
 </div>

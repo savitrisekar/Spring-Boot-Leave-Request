@@ -3,126 +3,290 @@
 
     <head><title>List Request</title></head>
     <div th:replace="header :: headercss"></div>
-    <div th:replace="m_listrequest :: m_listrequest"></div>
-
-    <body>
-        <section id="container">
-            <!-- **********************************************************************************************************************************************************
-                TOP BAR CONTENT & NOTIFICATIONS
-                *********************************************************************************************************************************************************** -->
-            <!--header start-->
-            <header class="header black-bg">
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-                </div>
-                <!--logo start-->
-                <a th:href="@{/home}"class="logo"><b>Admin<span> LeReq</span></b></a>
-                <!--logo end-->
-
-                <div class="top-menu">
-                    <ul class="nav pull-right top-menu">
-                        <li><a class="logout" th:href="@{/login}">Logout</a></li>
-                    </ul>
-                </div>
-            </header>
-            <!--header end-->
-            <!-- **********************************************************************************************************************************************************
-                MAIN SIDEBAR MENU
-                *********************************************************************************************************************************************************** -->
-            <!--sidebar start-->
-            <aside>
-                <div id="sidebar" class="nav-collapse ">
-                    <!-- sidebar menu start-->
-                    <ul class="sidebar-menu" id="nav-accordion">
-                        <p class="centered"><a th:href="@{/user/profile}"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                        <h5 class="centered">Arif Fridasari</h5>
-                        <li class="mt">
-                            <a th:href="@{/home}">
-                                <i class="fa fa-dashboard"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="dist/javascript:;">
-                                <i class="fa fa-th"></i>
-                                <span>Data</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a th:href="@{/account}">Account</a></li>
-                                <li><a th:href="@{/employee}">Employee</a></li>
-                                <li><a th:href="@{/job}">Job</a></li>
-                                <li><a th:href="@{/role}">Role</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a class="active" href="javascript:;">
-                                <i class="fa fa-tasks"></i>
-                                <span>Request</span>
-                            </a>
-                            <ul class="sub">
-                                <li class="active"><a th:href="@{/listrequest}">List Request</a></li>
-                                <li><a th:href="@{/history}">List History</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- sidebar menu end-->
-                </div>
-            </aside>
-            <!--sidebar end-->
-            <!-- **********************************************************************************************************************************************************
-                MAIN CONTENT
-                *********************************************************************************************************************************************************** -->
-            <!--main content start-->
-            <section id="main-content">
-                <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i>  List Leave Request</h3>
-                    <div class="row mb">
-                        <!-- page start-->
-                        <div class="content-panel">
-                            <div class="adv-table">
-                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-                                    <thead>
-                                        <tr>
-                                            <!--<th>No.</th>-->
-                                            <th>ID</th>
-                                            <th>Requester</th>
-                                            <th>Type</th>
-                                            <th>Notes</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Total Leave</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="LR:${dataLR}">
-                                            <td id="id" th:text="${LR.id}"></td>
-                                            <td th:text="${LR.requester.firstName}"></td>
-                                            <td id="type" th:text="${LR.type.name}"></td>
-                                            <td th:text="${LR.notes}"></td>
-                                            <td th:text="${LR.startDate}"></td>
-                                            <td th:text="${LR.endDate}"></td>
-                                            <td th:text="${LR.totalLeave}"></td>
-                                            <td id="status" th:text="${LR.status.name}"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-sm btnEdit" data-toggle="modal" data-target="#Approval"><i class="fa fa-check"></i>&nbsp;&nbsp;Approved</button><br><br>
-                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i>&nbsp;&nbsp;Rejected</button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+    <!--<div th:replace="m_listrequest :: m_listrequest"></div>-->
+    <div class="FormApproval">
+        <div class="modal fade" id="Approval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Approval Leave Request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="form-panel">
+                                    <div class=" form">
+                                        <form th:action="@{/leaveApproval/id}" method="post" class="form-horizontal">
+                                            <div class="form-group ">
+                                                <label for="id" class="control-label col-lg-3">LR</label>
+                                                <div class="col-lg-7">
+                                                    <input class=" form-control" id="id" name="id" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="requester" class="control-label col-lg-3">Employee</label>
+                                                <div class="col-lg-7">
+                                                    <select name="requester" id="type" class="form-control">
+                                                        <option value="">-- Select Employee --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="type" class="control-label col-lg-3">Type Leave</label>
+                                                <div class="col-lg-7">
+                                                    <select name="type" id="type" class="form-control">
+                                                        <option value="">-- Select Type --</option>
+                                                        <option th:each="data:${dataType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--                                        <div class="form-group ">
+                                                                                        <label for="requester" class="control-label col-lg-3">Employee</label>
+                                                                                        <div class="col-lg-7">
+                                                                                            <input class=" form-control" id="requester" name="requester" type="text" readonly/>
+                                                                                        </div>
+                                                                                    </div>-->
+                                            <!--                                        <div class="form-group ">
+                                                                                        <label for="type" class="control-label col-lg-3">Type Leave</label>
+                                                                                        <div class="col-lg-7">
+                                                                                             <input class=" form-control" id="type" name="type" type="text" readonly/>
+                                                                                        </div>
+                                                                                    </div>-->
+                                            <div class="form-group ">
+                                                <label for="startDate" class="control-label col-lg-3">Start Date</label>
+                                                <div class="col-lg-7">
+                                                    <input class=" form-control" id="startDate" name="startDate" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="endDate" class="control-label col-lg-3">End Date</label>
+                                                <div class="col-lg-7">
+                                                    <input class=" form-control" id="endDate" name="endDate" type="text" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="notes" class="control-label col-lg-3">Notes</label>
+                                                <div class="col-lg-7">
+                                                    <textarea class="form-control" name="notes" id="notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us" readonly></textarea>
+                                                    <div class="validate"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-theme" type="submit">Approved</button>
+                                                    <button class="btn btn-theme04" type="button">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- page end-->
                     </div>
-                    <!-- /row -->
-                </section>
-                <!-- /wrapper -->
-            </section>
+                </div>
+            </div>
+        </div>
 
-            <div th:replace="footer :: footer"></div>
-    </body>
+        <div class="FormReject">
+            <div class="modal fade" id="Reject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Reject Leave Request</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mt">
+                                <div class="col-lg-12">
+                                    <div class="form-panel">
+                                        <div class=" form">
+                                            <form th:action="@{/leaveReject/id}" method="post" class="form-horizontal">
+                                                <div class="form-group ">
+                                                    <label for="id" class="control-label col-lg-3">LR</label>
+                                                    <div class="col-lg-7">
+                                                        <input class=" form-control" id="id" name="id" type="text" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="requester" class="control-label col-lg-3">Employee</label>
+                                                    <div class="col-lg-7">
+                                                        <select name="requester" id="type" class="form-control">
+                                                            <option value="">-- Select Employee --</option>
+                                                            <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="type" class="control-label col-lg-3">Type Leave</label>
+                                                    <div class="col-lg-7">
+                                                        <select name="type" id="type" class="form-control">
+                                                            <option value="">-- Select Type --</option>
+                                                            <option th:each="data:${dataType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="startDate" class="control-label col-lg-3">Start Date</label>
+                                                    <div class="col-lg-7">
+                                                        <input class=" form-control" id="startDate" name="startDate" type="text" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="endDate" class="control-label col-lg-3">End Date</label>
+                                                    <div class="col-lg-7">
+                                                        <input class=" form-control" id="endDate" name="endDate" type="text" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="notes" class="control-label col-lg-3">Employee Notes</label>
+                                                    <div class="col-lg-7">
+                                                        <textarea class="form-control" name="notes" id="notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us" readonly></textarea>
+                                                        <div class="validate"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="status_notes" class="control-label col-lg-3">Reject Notes</label>
+                                                    <div class="col-lg-7">
+                                                        <textarea class="form-control" name="status_notes" id="status_notes" placeholder="Your Notes" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                                                        <div class="validate"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">
+                                                        <button class="btn btn-theme04" type="submit">Reject</button>
+                                                        <button class="btn btn-theme" type="button">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-</html>
+            <body>
+                <section id="container">
+                    <!-- **********************************************************************************************************************************************************
+                        TOP BAR CONTENT & NOTIFICATIONS
+                        *********************************************************************************************************************************************************** -->
+                    <!--header start-->
+                    <header class="header black-bg">
+                        <div class="sidebar-toggle-box">
+                            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                        </div>
+                        <!--logo start-->
+                        <a th:href="@{/home}"class="logo"><b>Admin<span> LeReq</span></b></a>
+                        <!--logo end-->
+
+                        <div class="top-menu">
+                            <ul class="nav pull-right top-menu">
+                                <li><a class="logout" th:href="@{/login}">Logout</a></li>
+                            </ul>
+                        </div>
+                    </header>
+                    <!--header end-->
+                    <!-- **********************************************************************************************************************************************************
+                        MAIN SIDEBAR MENU
+                        *********************************************************************************************************************************************************** -->
+                    <!--sidebar start-->
+                    <aside>
+                        <div id="sidebar" class="nav-collapse ">
+                            <!-- sidebar menu start-->
+                            <ul class="sidebar-menu" id="nav-accordion">
+                                <p class="centered"><a th:href="@{/user/profile}"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+                                <h5 class="centered">Arif Fridasari</h5>
+                                <li class="mt">
+                                    <a th:href="@{/home}">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="sub-menu">
+                                    <a href="dist/javascript:;">
+                                        <i class="fa fa-th"></i>
+                                        <span>Data</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li><a th:href="@{/account}">Account</a></li>
+                                        <li><a th:href="@{/employee}">Employee</a></li>
+                                        <li><a th:href="@{/job}">Job</a></li>
+                                        <li><a th:href="@{/role}">Role</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub-menu">
+                                    <a class="active" href="javascript:;">
+                                        <i class="fa fa-tasks"></i>
+                                        <span>Request</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li class="active"><a th:href="@{/listrequest}">List Request</a></li>
+                                        <li><a th:href="@{/history}">List History</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- sidebar menu end-->
+                        </div>
+                    </aside>
+                    <!--sidebar end-->
+                    <!-- **********************************************************************************************************************************************************
+                        MAIN CONTENT
+                        *********************************************************************************************************************************************************** -->
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <h3><i class="fa fa-angle-right"></i>  List Leave Request</h3>
+                            <div class="row mb">
+                                <!-- page start-->
+                                <div class="content-panel">
+                                    <div class="adv-table">
+                                        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                                            <thead>
+                                                <tr>
+                                                    <!--<th>No.</th>-->
+                                                    <th>ID</th>
+                                                    <th>Requester</th>
+                                                    <th>Type</th>
+                                                    <th>Notes</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Total Leave</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="LR:${dataLR}">
+                                                    <td id="id" th:text="${LR.id}"></td>
+                                                    <td id="requester"  th:text="${LR.requester.firstName}"></td>
+                                                    <td id="type" th:value="${LR.type}" th:text="${LR.type.name}"></td>
+                                                    <td id="notes" th:text="${LR.notes}"></td>
+                                                    <td id="startDate" th:text="${LR.startDate}"></td>
+                                                    <td id="endDate" th:text="${LR.endDate}"></td>
+                                                    <td id="totalLeave" th:text="${LR.totalLeave}"></td>
+                                                    <td id="status" th:value="${LR.status}" th:text="${LR.status.name}"></td>
+                                                    <td>
+                                                        <button  type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Approval"><i class="fa fa-check"></i>&nbsp;&nbsp;Approved</button><br><br>
+                                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#Reject"><i class="fa fa-ban"></i>&nbsp;&nbsp;Rejected</button>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- page end-->
+                            </div>
+                            <!-- /row -->
+                        </section>
+                        <!-- /wrapper -->
+                    </section>
+
+                    <div th:replace="footer :: footer"></div>
+            </body>
+
+            </html>

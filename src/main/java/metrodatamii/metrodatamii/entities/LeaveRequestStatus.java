@@ -33,11 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "leave_request_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "LeaveRequestStatus.findAll", query = "SELECT l FROM LeaveRequestStatus l")
-    , @NamedQuery(name = "LeaveRequestStatus.findById", query = "SELECT l FROM LeaveRequestStatus l WHERE l.id = :id")
-    , @NamedQuery(name = "LeaveRequestStatus.findByLeaveRequest", query = "SELECT l FROM LeaveRequestStatus l WHERE l.leaveRequest = :leaveRequest")
-    , @NamedQuery(name = "LeaveRequestStatus.findByStatusDate", query = "SELECT l FROM LeaveRequestStatus l WHERE l.statusDate = :statusDate")
-    , @NamedQuery(name = "LeaveRequestStatus.findByStatusNotes", query = "SELECT l FROM LeaveRequestStatus l WHERE l.statusNotes = :statusNotes")})
+    @NamedQuery(name = "LeaveRequestStatus.findAll", query = "SELECT l FROM LeaveRequestStatus l")})
 public class LeaveRequestStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;

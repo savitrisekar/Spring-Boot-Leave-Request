@@ -157,5 +157,83 @@ and open the template in the editor.
             </div>
         </div>
     </div>
-        <!-- End Modal Employee -->
+    <!-- End Modal Employee -->
+
+    <div class="myForm2">
+        <div class="modal fade" id="SoftDelEmp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Delete Employee</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mt">
+                            <div class="col-lg-12">
+                                <div class="form-panel">
+                                    <div class="form">
+                                        <form class="form-horizontal" th:action="@{/employeeDel/id}" method="post">
+                                            <div class=" form-group">
+                                                <label for="id" class="control-label col-lg-2">Id</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="id" name="id" type="text" readonly />
+                                                </div>
+                                            </div>
+                                            <div class=" form-group">
+                                                <label for="firstName" class="control-label col-lg-2">First name</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="firstName" name="firstName" type="text" readonly />
+                                                </div>
+                                            </div>
+                                            <div class=" form-group">
+                                                <label for="lastName" class="control-label col-lg-2">Last name</label>
+                                                <div class="col-lg-10">
+                                                    <input class=" form-control" id="lastName" name="lastName" type="text" readonly />
+                                                </div>
+                                            </div>
+                                            <div class=" form-group">
+                                                <label for="email" class="control-label col-lg-2">Email</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="email" name="email" type="email" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class=" form-group">
+                                                <label for="salary" class="control-label col-lg-2">Salary</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="salary" name="salary" type="number" readonly />
+                                                </div>
+                                            </div>
+                                            <div class=" form-group">
+                                                <label for="phoneNumber" class="control-label col-lg-2">Phone Number</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="phoneNumber" name="phoneNumber" type="text" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="hidden form-group">
+                                                <label for="manager" class="control-label col-lg-2">Manager</label>
+                                                <div class="col-lg-10">
+                                                    <select name="manager" id="manager" class="form-control">
+                                                        <option value="">-- Select Manager --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-3 col-lg-10">
+                                                    <button class="btn btn-danger BtnDel" type="submit">Delete</button>
+                                                    <button class="btn btn-default" type="button">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+</div>

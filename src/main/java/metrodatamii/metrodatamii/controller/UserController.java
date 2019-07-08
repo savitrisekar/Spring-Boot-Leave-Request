@@ -8,6 +8,7 @@ package metrodatamii.metrodatamii.controller;
 import metrodatamii.metrodatamii.entities.LeaveRequest;
 import metrodatamii.metrodatamii.entities.Status;
 import metrodatamii.metrodatamii.repository.ILeaveRequestRepository;
+import metrodatamii.metrodatamii.service.EmployeeService;
 import metrodatamii.metrodatamii.service.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     private LeaveTypeService typeService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
     private ILeaveRequestRepository leaveRequestRepository;
@@ -50,6 +54,7 @@ public class UserController {
 
     @GetMapping("/user/request")
     public String userHistory(Model model) {
+        model.addAttribute("dataEmployee", employeeService.getAll());
         model.addAttribute("dataType", typeService.findAllType());
         model.addAttribute("dataLR", leaveRequestRepository.getByStatusPending());
         return "user_request";

@@ -57,9 +57,12 @@
                                     <div class=" form">
                                         <form th:action="@{/addRequest}" method="post" class="form-horizontal">
                                             <div class="form-group ">
-                                                <label for="requester" class="control-label col-lg-3">ID Emp</label>
+                                                <label for="requester" class="control-label col-lg-3">Employee</label>
                                                 <div class="col-lg-7">
-                                                    <input class=" form-control" id="requester" name="requester" type="text"/>
+                                                    <select name="requester" id="type" class="form-control">
+                                                        <option value="">-- Select Employee --</option>
+                                                        <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
@@ -278,7 +281,7 @@
         </script>
         <script>
             $(document).ready(function () {
-               
+
                 datesToBeDisabled = ["07/13/2019"];
 
                 $('.dateOK').date({
