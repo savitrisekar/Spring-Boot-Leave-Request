@@ -5,6 +5,7 @@
  */
 package metrodatamii.metrodatamii.service;
 
+import java.util.List;
 import metrodatamii.metrodatamii.entities.Account;
 import metrodatamii.metrodatamii.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,10 @@ public class AccountService {
     public Iterable<Account> findAllAccount() {
         return accountRepository.findAll();
     }
+    
+    public List<Account> getAll() {
+        return accountRepository.getAll();
+    }
+
+    
 }

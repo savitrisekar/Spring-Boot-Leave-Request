@@ -6,12 +6,14 @@
 package metrodatamii.metrodatamii.controller;
 
 import javax.validation.Valid;
+import metrodatamii.metrodatamii.entities.Account;
 import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.LeaveRequest;
 import metrodatamii.metrodatamii.entities.LeaveType;
 import metrodatamii.metrodatamii.entities.Role;
 import metrodatamii.metrodatamii.entities.Status;
+import metrodatamii.metrodatamii.repository.IAccountRepository;
 import metrodatamii.metrodatamii.repository.IEmployeeRepository;
 import metrodatamii.metrodatamii.repository.IJobRepository;
 import metrodatamii.metrodatamii.repository.ILeaveRequestRepository;
@@ -57,6 +59,9 @@ public class AdminController {
 
     @Autowired
     private AccountService accountService;
+    
+    @Autowired
+    private IAccountRepository accountRepository;
 
     @Autowired
     private EmployeeService employeeService;
@@ -117,9 +122,16 @@ public class AdminController {
 
     @GetMapping("/account")
     public String account(Model model) {
-        model.addAttribute("dataAccount", accountService.findAllAccount());
+        model.addAttribute("dataAccount", accountService.getAll());
         model.addAttribute("dataEmployee", employeeService.getAll());
         return "account";
+    }
+    @PostMapping("/accountDelete/{id}")
+    public String softDelete(@PathVariable("id") String id, @Valid Account account) {
+        account.setIsDelete("true");
+        account.setIsActive("false");
+        accountRepository.save(account);
+        return "redirect:/account";
     }
 
     @GetMapping("/job")
@@ -175,6 +187,7 @@ public class AdminController {
 //        leaveRequestRepository.save(leaveRequest);
 //        return "redirect:/listrequest";
 //    }
+    
     @PostMapping("/leaveApproval/{id}")
     public String upadateData(@PathVariable("id") String id, @Valid LeaveRequest leaveRequest
     ) {

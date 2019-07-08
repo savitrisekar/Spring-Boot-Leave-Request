@@ -3,7 +3,7 @@
 
     <head><title>Data-Account</title></head>
     <div th:replace="header :: headercss"></div>
-    
+
     <body>
         <!-- Modal AddAccount -->
         <div class="modal fade" id="AddAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,60 +64,66 @@
             </div>
         </div>
         <!-- End Modal AddJob -->
-
-        <!-- Modal Edit -->
-<!--        <div class="modal fade" id="EditAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="DelAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Account</h4>
+                        <h4 class="modal-title" id="myModalLabel">Remove Account</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row mt">
                             <div class="col-lg-12">
                                 <div class="form-panel">
                                     <div class=" form">
-                                        <form class="cmxform form-horizontal style-form" id="commentForm" method="get" action="">
+                                        <form th:action="@{/accountDelete/id}" method="post" class="cmxform form-horizontal style-form">
                                             <div class="form-group ">
-                                                <label for="cname" class="control-label col-lg-2">ID</label>
+                                                <label for="id" class="control-label col-lg-2">ID</label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control " id="id" name="id" type="text" readonly />
+                                                    <input class="form-control " id="id" name="id" type="text" required />
                                                 </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label for="username" class="control-label col-lg-2">Username</label>
                                                 <div class="col-lg-10">
-                                                    <input class="form-control " id="username" name="username" type="text" readonly />
+                                                    <input class="form-control " id="username" name="username" type="text" required />
                                                 </div>
                                             </div>
-                                            <div class="form-group ">
-                                                <label for="cname" class="control-label col-lg-2">Status</label>
-                                                <div class="col-sm-9">
-                                                    <select name="status" id="manager" class="form-control">
-                                                        <option value="">-- Select Status --</option>
-                                                        <option th:each="data:${dataAccount}" th:value="${data.id}" th:text="${data.isActive}? 'Active' : 'Not Active'"></option>
-                                                    </select>
+                                            <div class="hidden form-group ">
+                                                <label for="password" class="control-label col-lg-2">Password</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="password" name="password" type="text" required />
+                                                </div>
+                                            </div>
+                                            <div class="hidden form-group ">
+                                                <label for="isActive" class="control-label col-lg-2">Status</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="isActive" name="isActive" type="text" required />
+                                                </div>
+                                            </div>
+                                            <div class="hidden form-group ">
+                                                <label for="isDelete" class="control-label col-lg-2">Status</label>
+                                                <div class="col-lg-10">
+                                                    <input class="form-control " id="isDelete" name="isDelete" type="text" required />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button class="btn btn-theme" type="submit">Save</button>
-                                                    <button class="btn btn-theme04" type="button">Cancel</button>
+                                                    <button class="btn btn-theme04" type="submit">Delete</button>
+                                                    <button class="btn btn-theme" type="button">Cancel</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                 /form-panel 
+                                <!-- /form-panel -->
                             </div>
-                             /col-lg-12 
+                            <!-- /col-lg-12 -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>-->
-        <!-- End Modal Edit -->
+        </div>
 
 
         <section id="container">
@@ -206,12 +212,15 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="Account:${dataAccount}">
-                                            <td th:text="${Account.id}"></td>
-                                            <td th:text="${Account.username}"></td>
-                                            <td th:text="${Account.isActive}? 'Active' : 'Not Active'"></td>
+                                            <td id="id" th:text="${Account.id}"></td>
+                                            <td id="username" th:text="${Account.username}"></td>
+                                            <td class="hidden" id="password" th:text="${Account.password}"></td>
+                                            <td class="hidden" id="isActive" th:text="${Account.isActive}"></td>
+                                            <td class="hidden" id="isDelete" th:text="${Account.isDelete}"></td>
+                                            <td id="isActive2" th:text="${Account.isActive}? 'Active' : 'Not Active'"></td>
                                             <td>
                                                 <!--<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditAccount"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>-->
-                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DelAccount"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                             </td>
                                         </tr>
 
@@ -226,7 +235,7 @@
                 <!-- /wrapper -->
             </section>
         </section>
-         <div th:replace="footer :: footer"></div>
+        <div th:replace="footer :: footer"></div>
     </body>
 
 </html>

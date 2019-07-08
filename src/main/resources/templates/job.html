@@ -128,8 +128,8 @@
                                             <td th:text="${emp.id}"></td>
                                             <td th:text="${emp.firstName + ' ' + emp.lastName}"></td>
                                             <td>
-                                                <a th:each="list:${emp.employeeRoleList}">
-                                                    <p th:text="${list.role.name}"></p></a>
+                                                <a th:each="list:${emp.employeeJobList}">
+                                                    <p th:text="${list.job.name}"></p></a>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#EditJob"><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>

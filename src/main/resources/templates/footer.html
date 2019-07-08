@@ -78,6 +78,25 @@ and open the template in the editor.
             })
         </script>
         <!--End Job-->
+        <script>
+            $(document).ready(function () {
+                $('#DelAccount').on('show.bs.modal', function (e) {
+                    event.preventDefault();
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _AcId = _row.find("#id").text();
+                    var _AcName = _row.find("#username").text();
+                    var _AcPwd = _row.find("#password").text();
+                    var _AcAct = _row.find("#isActive").text();
+                    var _AcIsDel = _row.find("#isDelete").text();
+                    $(this).find("#id").val(_AcId);
+                    $(this).find("#username").val(_AcName);
+                    $(this).find("#password").val(_AcPwd);
+                    $(this).find("#isActive").val(_AcAct);
+                    $(this).find("#isDelete").val(_AcIsDel);
+                })
+            })
+        </script>
 
         <script>
             $(document).ready(function () {
@@ -91,6 +110,7 @@ and open the template in the editor.
                     var _lrStDa = _row.find("#startDate").text();
                     var _lrEnDa = _row.find("#endDate").text();
                     var _lrNotes = _row.find("#notes").text();
+                    var _lrTotal= _row.find("#totalLeave").text();
                     
                     $(this).find("#id").val(_lrId);
                     $(this).find("#requester").val(_lrReg);
@@ -98,16 +118,9 @@ and open the template in the editor.
                     $(this).find("#startDate").val(_lrStDa);
                     $(this).find("#endDate").val(_lrEnDa);
                     $(this).find("#notes").val(_lrNotes);
+                    $(this).find("#totalLeave").val(_lrTotal);
 
 
-                    var separate_start_date = _lrStDa.split('-');
-                    var separate_end_date = _lrEnDa.split('-');
-                    var object_date = new Date();
-
-                    var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
-                    var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
-                    var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);
-                    $('#totalLeave').val(result);
                 })
             })
         </script>
@@ -123,6 +136,8 @@ and open the template in the editor.
                     var _lrStDa = _row.find("#startDate").text();
                     var _lrEnDa = _row.find("#endDate").text();
                     var _lrNotes = _row.find("#notes").text();
+                    var _lrStatusNotes = _row.find("#statusNotes").text();
+                    var _lrTotal= _row.find("#totalLeave").text();
                     
                     $(this).find("#id").val(_lrId);
                     $(this).find("#requester").val(_lrReg);
@@ -130,16 +145,9 @@ and open the template in the editor.
                     $(this).find("#startDate").val(_lrStDa);
                     $(this).find("#endDate").val(_lrEnDa);
                     $(this).find("#notes").val(_lrNotes);
+                    $(this).find("#statusNotes").val(_lrStatusNotes);
+                    $(this).find("#totalLeave").val(_lrTotal);
 
-
-                    var separate_start_date = _lrStDa.split('-');
-                    var separate_end_date = _lrEnDa.split('-');
-                    var object_date = new Date();
-
-                    var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
-                    var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
-                    var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);
-                    $('#totalLeave').val(result);
                 })
             })
         </script>
@@ -157,25 +165,25 @@ and open the template in the editor.
                             $(this).find("#name").val(_jobName);
                         })
                     })
-                </script>-->
-        <!--        <script>
-                    $(document).ready(function () {
-                        $('.table .eBtn').on('click', function (event) {
-                            event.preventDefault();
-                            var href = $(this).attr('href');
-                            $.get(href, function (employee, status) {
-                                $('.myForm #id').val(employee.id);
-                                $('.myForm #firstName').val(employee.firstName);
-                                $('.myForm #lastName').val(employee.lastName);
-                                $('.myForm #email').val(employee.email);
-                                $('.myForm #phoneNumber').val(employee.phoneNumber);
-                                $('.myForm #salary').val(employee.salary);
-                                $('.myForm #manager option:selected').val(employee.manager);
-                            });
-                            $('.myForm #EditEmployee').modal();
-                        });
+                     </script> -->  
+        <script>
+            $(document).ready(function () {
+                $('.table .eBtn').on('click', function (event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+                    $.get(href, function (employee, status) {
+                        $('.myForm #id').val(employee.id);
+                        $('.myForm #firstName').val(employee.firstName);
+                        $('.myForm #lastName').val(employee.lastName);
+                        $('.myForm #email').val(employee.email);
+                        $('.myForm #phoneNumber').val(employee.phoneNumber);
+                        $('.myForm #salary').val(employee.salary);
+                        $('.myForm #manager option:selected').val(employee.manager);
                     });
-                </script>-->
+                    $('.myForm #EditEmployee').modal();
+                });
+            });
+        </script>
         <script>
             $(document).ready(function () {
                 $('.table .btnDel').on('click', function (event) {
