@@ -7,6 +7,7 @@ package metrodatamii.metrodatamii.entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -68,6 +69,8 @@ public class Account implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
+    private Validation validation;
 
     public Account() {
     }
@@ -76,23 +79,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String id, String isDelete, String isActive, String token) {
-        this.id = id;
-        this.isDelete = isDelete;
-        this.isActive = isActive;
-        this.token = token;
-    }
-
-    public Account(String id, String username, String password, String isDelete, String isActive, String token) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.isDelete = isDelete;
-        this.isActive = isActive;
-        this.token = token;
-    }
-
-   
     public Account(String id, String isActive) {
         this.id = id;
         this.isActive = isActive;
@@ -160,6 +146,14 @@ public class Account implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Validation getValidation() {
+        return validation;
+    }
+
+    public void setValidation(Validation validation) {
+        this.validation = validation;
     }
 
     @Override

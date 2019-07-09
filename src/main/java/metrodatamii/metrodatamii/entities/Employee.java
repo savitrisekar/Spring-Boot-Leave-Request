@@ -99,6 +99,15 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
+    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.salary = salary;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, Employee manager) {
         this.id = id;
         this.firstName = firstName;
@@ -108,19 +117,6 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
         this.manager = manager;
     }
-
-    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, List<Employee> employeeList, Employee manager) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.salary = salary;
-        this.phoneNumber = phoneNumber;
-        this.employeeList = employeeList;
-        this.manager = manager;
-    }
-    
-    
 
     public String getId() {
         return id;
@@ -254,5 +250,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.Employee[ id=" + id + " ]";
     }
-    
+
 }

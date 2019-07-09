@@ -23,6 +23,7 @@
     <class>metrodatamii.metrodatamii.entities.AnnualLeave</class>
     <class>metrodatamii.metrodatamii.entities.Account</class>
     <class>metrodatamii.metrodatamii.entities.Token</class>
+    <class>metrodatamii.metrodatamii.entities.Validation</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

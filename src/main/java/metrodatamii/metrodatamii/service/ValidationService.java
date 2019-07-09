@@ -6,27 +6,25 @@
 package metrodatamii.metrodatamii.service;
 
 import java.util.List;
-import metrodatamii.metrodatamii.entities.Account;
-import metrodatamii.metrodatamii.repository.IAccountRepository;
+import metrodatamii.metrodatamii.entities.Validation;
+import metrodatamii.metrodatamii.repository.IValidationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Arif Fridasari
+ * @author Sekar Ayu Safitri
  */
 @Service
-public class AccountService {
-
+public class ValidationService {
     @Autowired
-    private IAccountRepository accountRepository;
+    private IValidationRepository validRepository;
 
-    public Iterable<Account> findAllAccount() {
-        return accountRepository.findAll();
+    public Iterable<Validation> findAllValidation() {
+        return validRepository.findAll();
     }
     
-    public List<Account> getAll() {
-        return accountRepository.getAll();
-    }
-
+//    public List<Validation> getAll() {
+//        return validRepository.getAll();
+//    }
 }
