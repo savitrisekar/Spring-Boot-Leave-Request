@@ -19,13 +19,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author KHAIRUL MUNA
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "annual_leave")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AnnualLeave.findAll", query = "SELECT a FROM AnnualLeave a")})
+    @NamedQuery(name = "AnnualLeave.findAll", query = "SELECT a FROM AnnualLeave a")
+    , @NamedQuery(name = "AnnualLeave.findById", query = "SELECT a FROM AnnualLeave a WHERE a.id = :id")
+    , @NamedQuery(name = "AnnualLeave.findByRemain", query = "SELECT a FROM AnnualLeave a WHERE a.remain = :remain")
+    , @NamedQuery(name = "AnnualLeave.findByIsDelete", query = "SELECT a FROM AnnualLeave a WHERE a.isDelete = :isDelete")})
 public class AnnualLeave implements Serializable {
 
     private static final long serialVersionUID = 1L;

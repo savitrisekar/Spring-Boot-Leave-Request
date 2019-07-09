@@ -27,13 +27,20 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author KHAIRUL MUNA
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "employee")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")})
+    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
+    , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
+    , @NamedQuery(name = "Employee.findByFirstName", query = "SELECT e FROM Employee e WHERE e.firstName = :firstName")
+    , @NamedQuery(name = "Employee.findByLastName", query = "SELECT e FROM Employee e WHERE e.lastName = :lastName")
+    , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
+    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
+    , @NamedQuery(name = "Employee.findByPhoneNumber", query = "SELECT e FROM Employee e WHERE e.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "Employee.findByIsDelete", query = "SELECT e FROM Employee e WHERE e.isDelete = :isDelete")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -102,15 +109,18 @@ public class Employee implements Serializable {
         this.manager = manager;
     }
 
-    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, String isDelete) {
+    public Employee(String id, String firstName, String lastName, String email, int salary, String phoneNumber, List<Employee> employeeList, Employee manager) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.salary = salary;
         this.phoneNumber = phoneNumber;
-        this.isDelete = isDelete;
+        this.employeeList = employeeList;
+        this.manager = manager;
     }
+    
+    
 
     public String getId() {
         return id;
@@ -244,5 +254,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "metrodatamii.metrodatamii.entities.Employee[ id=" + id + " ]";
     }
-
+    
 }

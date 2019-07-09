@@ -129,7 +129,7 @@ public class AdminController {
                 emp.getEmail(),
                 emp.getSalary(),
                 emp.getPhoneNumber(),
-                emp.getManager().getId()
+                emp.getManager()
         );
         return emp;
     }

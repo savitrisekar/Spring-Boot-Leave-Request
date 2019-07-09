@@ -23,13 +23,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author KHAIRUL MUNA
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "account")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
+    , @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id")
+    , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
+    , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
+    , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")
+    , @NamedQuery(name = "Account.findByIsActive", query = "SELECT a FROM Account a WHERE a.isActive = :isActive")
+    , @NamedQuery(name = "Account.findByToken", query = "SELECT a FROM Account a WHERE a.token = :token")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,22 +45,16 @@ public class Account implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Size(max = 20)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
     @Lob
     @Column(name = "image")
     private byte[] image;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
+    @Size(max = 5)
     @Column(name = "is_delete")
     private String isDelete;
     @Basic(optional = false)
@@ -62,6 +62,9 @@ public class Account implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "is_active")
     private String isActive;
+    @Size(max = 255)
+    @Column(name = "token")
+    private String token;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
@@ -73,11 +76,25 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String id, String username, String password, String isDelete, String isActive) {
+    public Account(String id, String isDelete, String isActive, String token) {
+        this.id = id;
+        this.isDelete = isDelete;
+        this.isActive = isActive;
+        this.token = token;
+    }
+
+    public Account(String id, String username, String password, String isDelete, String isActive, String token) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.isDelete = isDelete;
+        this.isActive = isActive;
+        this.token = token;
+    }
+
+   
+    public Account(String id, String isActive) {
+        this.id = id;
         this.isActive = isActive;
     }
 
@@ -127,6 +144,14 @@ public class Account implements Serializable {
 
     public void setIsActive(String isActive) {
         this.isActive = isActive;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Employee getEmployee() {

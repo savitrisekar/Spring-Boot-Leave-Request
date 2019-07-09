@@ -25,13 +25,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author KHAIRUL MUNA
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "leave_type")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "LeaveType.findAll", query = "SELECT l FROM LeaveType l")})
+    @NamedQuery(name = "LeaveType.findAll", query = "SELECT l FROM LeaveType l")
+    , @NamedQuery(name = "LeaveType.findById", query = "SELECT l FROM LeaveType l WHERE l.id = :id")
+    , @NamedQuery(name = "LeaveType.findByName", query = "SELECT l FROM LeaveType l WHERE l.name = :name")
+    , @NamedQuery(name = "LeaveType.findByDuration", query = "SELECT l FROM LeaveType l WHERE l.duration = :duration")
+    , @NamedQuery(name = "LeaveType.findByIsDelete", query = "SELECT l FROM LeaveType l WHERE l.isDelete = :isDelete")})
 public class LeaveType implements Serializable {
 
     private static final long serialVersionUID = 1L;

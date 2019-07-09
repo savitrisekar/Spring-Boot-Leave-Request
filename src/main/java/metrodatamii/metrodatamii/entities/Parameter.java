@@ -19,13 +19,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author KHAIRUL MUNA
+ * @author Sekar Ayu Safitri
  */
 @Entity
 @Table(name = "parameter")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Parameter.findAll", query = "SELECT p FROM Parameter p")})
+    @NamedQuery(name = "Parameter.findAll", query = "SELECT p FROM Parameter p")
+    , @NamedQuery(name = "Parameter.findById", query = "SELECT p FROM Parameter p WHERE p.id = :id")
+    , @NamedQuery(name = "Parameter.findByValue", query = "SELECT p FROM Parameter p WHERE p.value = :value")})
 public class Parameter implements Serializable {
 
     private static final long serialVersionUID = 1L;
